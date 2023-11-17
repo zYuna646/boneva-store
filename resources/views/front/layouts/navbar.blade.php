@@ -48,6 +48,10 @@
               <i class="fa-solid fa-table-list"></i>&nbsp;
               Catalog
             </a>
+            <a class="btn btn-nav-link" href="{{ route('catalog') }}">
+              <i class="fas fa-shopping-cart"></i>&nbsp;
+              Keranjang
+            </a>
             @auth
               <a class="btn btn-nav-link2" href="{{ route('admin.dashboard') }}">
                 Back to Dashboard &nbsp;
@@ -67,6 +71,7 @@
                 Catalog
               </a>
             @endif
+            
             @auth
               <a class="btn btn-nav-link2" href="{{ route('admin.dashboard') }}">
                 Back to Dashboard &nbsp;

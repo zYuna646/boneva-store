@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,25 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+
+            if (auth()->user()->verified == true) {
+                if (auth()->user()->role == 'admin') {
+                    return redirect()->route('admin.dashboard');
+                } else {
+                    return redirect()->route('home');
+                }
+            } else {
+                $this->logout($request);
+                return redirect('login')->with('failed', 'Akun Belum Diverifikasi');
+            }
+        } else {
+            return $this->sendFailedLoginResponse($request);
+        }
+    }
+
 }

@@ -83,7 +83,7 @@
                             <div class="border-top border-bottom py-3">
                                 <table>
                                     <tr>
-                                        <td><strong>Fabric</strong></td>
+                                        <td><strong>Unit</strong></td>
                                         <td>:</td>
                                         <td>{{ $data->fabric ?? '' }}</td>
                                     </tr>

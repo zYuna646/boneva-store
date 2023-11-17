@@ -32,6 +32,14 @@
                     <span class="hide-menu">Master Data</span>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'account') active @endif" href="{{ route('admin.account') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-user"></i>
+                        </span>
+                        <span class="hide-menu">account</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link @if ($active == 'category') active @endif" href="{{ route('admin.category') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-category-2"></i>
@@ -45,14 +53,6 @@
                             <i class="ti ti-brand-appgallery"></i>
                         </span>
                         <span class="hide-menu">Catalog</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'gallery') active @endif" href="{{ route('admin.gallery') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-cards"></i>
-                        </span>
-                        <span class="hide-menu">Gallery</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

@@ -66,7 +66,7 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Stock</th>
-                            <th>Fabric</th>
+                            <th>Unit</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>

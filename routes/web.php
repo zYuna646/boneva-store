@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\accountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MainSliderController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\registerController;
 use App\Http\Controllers\ReviewSliderController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +34,19 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('/register', [registerController::class, 'index'])->name('register');
+Route::post('/register/create', [registerController::class, 'store'])->name('register.store');
+
+Route::post('/catalog/order/{id}', [OrderController::class, 'order'])->name('catalog.order');
+Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
+Route::post('/cart/add/{id}', [OrderController::class, 'add'])->name('cart.add');
+Route::post('/cart/minus/{id}', [OrderController::class, 'minus'])->name('cart.minus');
+
+
+
+
+
+
 Auth::routes([
     'register' => false, // Register Routes...
     'reset' => false, // Reset Password Routes...
@@ -47,6 +63,16 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::put('/admin/category/{id}/update', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::delete('/admin/category/{id}/delete', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
+    Route::get('/admin/account', [accountController::class, 'index'])->name('admin.account');
+    Route::get('/admin/account/add', [accountController::class, 'create'])->name('admin.account.create');
+    Route::post('/admin/account/store', [accountController::class, 'store'])->name('admin.account.store');
+    Route::put('/admin/account/{id}/verified', [accountController::class, 'verified'])->name('admin.account.verified');
+    Route::get('/admin/account/{id}/show', [accountController::class, 'show'])->name('admin.account.show');
+    Route::get('/admin/account/{id}/edit', [accountController::class, 'edit'])->name('admin.account.edit');
+    Route::put('/admin/account/{id}/update', [accountController::class, 'update'])->name('admin.account.update');
+    Route::delete('/admin/account/{id}/delete', [accountController::class, 'destroy'])->name('admin.account.delete');
+
+
     Route::get('/admin/catalog', [CatalogController::class, 'index'])->name('admin.catalog');
     Route::get('/admin/catalog/add', [CatalogController::class, 'create'])->name('admin.catalog.create');
     Route::post('/admin/catalog/store', [CatalogController::class, 'store'])->name('admin.catalog.store');
@@ -57,7 +83,6 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::delete('/admin/catalog/{id}/delete-image', [CatalogController::class, 'destroyImage'])->name('admin.catalog.delete-image');
 
     Route::get('/admin/gallery', [CatalogController::class, 'gallery'])->name('admin.gallery');
-
 
     Route::get('/admin/video', [VideoController::class, 'index'])->name('admin.video');
     Route::get('/admin/video/add', [VideoController::class, 'create'])->name('admin.video.create');
@@ -89,4 +114,6 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::get('/admin/account-setting', [AdminController::class, 'accountSetting'])->name('admin.account-setting');
     Route::put('/admin/change-password/{id}', [AdminController::class, 'changePassword'])->name('admin.change-password');
     Route::put('/admin/change-information/{id}', [AdminController::class, 'changeInformation'])->name('admin.change-information');
+
+
 });

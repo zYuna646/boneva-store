@@ -229,7 +229,7 @@
                             <div class="border-top border-bottom py-3">
                                 <table>
                                     <tr>
-                                        <td><strong>Fabric</strong></td>
+                                        <td><strong>Unit</strong></td>
                                         <td>:</td>
                                         <td>{{ $product->fabric ?? '' }}</td>
                                     </tr>
@@ -247,9 +247,13 @@
                                     data-link="{{ route('product.detail', $product->slug) }}">
                                     <i class="fa fa-link"></i> Copy Link Product
                                 </a>
-                                <a href="https://wa.me/{{ $no_hp }}" class="btn btn-shop" target="_blank">
-                                    <i class="fa fa-shop"></i> Shop Now
-                                </a>
+                                <form action="{{ route('catalog.order', $product->id) }}" method="post" target="_blank">
+                                    @csrf
+                                    <button type="submit" class="btn btn-shop">
+                                        <i class="fa fa-shop"></i> Shop Now
+                                    </button>
+                                </form>
+                                
                             </div>
                         </div>
                     </div>

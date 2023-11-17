@@ -87,7 +87,7 @@
                             <input type="number" name="stock" class="form-control" value="{{ old('stock') }}" />
                         </div>
                         <div>
-                            <label class="control-label mb-1">Fabric</label>
+                            <label class="control-label mb-1">Unit</label>
                             <input type="text" name="fabric" class="form-control" value="{{ old('fabric') }}" />
                         </div>
                     </div>
