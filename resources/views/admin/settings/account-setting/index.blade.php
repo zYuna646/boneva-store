@@ -199,6 +199,68 @@
             </div>
         </form>
     </div>
+
+    <div class="card">
+        <form action="{{ route('admin.payment') }}" method="post">
+            @csrf
+            @method('put')
+            <div class="card-body">
+                <div class="position-relative">
+                    <div class="mb-3 mb-sm-0">
+                        <h5 class="card-title fw-semibold">Change Payment Information</h5>
+                    </div>
+                    <div class="mt-4">
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Bank<span class="text-danger">*</span></label>
+                            <input type="text" name="bank" class="form-control @error('bank') is-invalid @enderror"
+                                placeholder="..." value="{{ old('bank', $payment->bank ?? '') }}" />
+                            @error('bank')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Nomor Rekening<span class="text-danger">*</span></label>
+                            <input type="text" name="rekening"
+                                class="form-control @error('rekening') is-invalid @enderror" placeholder="..."
+                                value="{{ old('rekening', $payment->nomor_rekening ?? '') }}" />
+                            @error('rekening')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Nama Pemilik rekening<span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="pemilik"
+                                class="form-control @error('pemilik') is-invalid @enderror" placeholder="..."
+                                value="{{ old('pemilik', $payment->pemilik_rekening ?? '') }}" />
+                            @error('pemilik')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="card-body border-top">
+                    <button type="submit" class="btn btn-success rounded-pill px-4">
+                        <div class="d-flex align-items-center">
+                            <i class="ti ti-device-floppy me-1 fs-4"></i>
+                            Update
+                        </div>
+                    </button>
+                    <button type="reset" class="btn btn-danger rounded-pill px-4 ms-2 text-white">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
 
 @push('scripts')

@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Paymen extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'user_id',
-        'status',
-        'items',
-        'alamat',
-        'bukti'
+        'bank',
+        'nomor_rekening',
+        'pemilik_rekening',
     ];
 }

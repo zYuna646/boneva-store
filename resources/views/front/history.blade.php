@@ -194,59 +194,6 @@
             </div>
         </div>
     </header>
-    <!-- End Header Slider -->
-    @if (count($product) > 0)
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Order</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('cart.cofirmation', $order->id) }}" method="post"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <div class="card-body">
-                                <h5 class="mb-3"><b>{{$payment->bank}}</b>: {{$payment->nomor_rekening}}</h5>
-                                <h6 class="mb-3"><b>{{$payment->pemilik_rekening}}</b></h6>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label class="control-label mb-1">Bukti Pembayaran<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="file" name="image"
-                                                class="form-control @error('image') is-invalid @enderror" />
-                                            @error('image')
-                                                <small class="invalid-feedback">
-                                                    {{ $message }}
-                                                </small>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="control-label mb-1">Alamat</label>
-                                            <textarea name="alamat" class="form-control" rows="4">{{ old('description') }}</textarea>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-shop" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-shop">Order</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    @endif
-    <!-- Modal -->
-
 
     <section class="product-detail">
         <div class="container">
@@ -255,23 +202,23 @@
                     <div class="row">
                         <div class="col-md-4 col-xl-3">
                             <div id="table_config_filter" class="position-relative">
-                                <input type="search" id="search-box" class="form-control ps-5" aria-controls="table_config"
-                                    placeholder="Search Product..." />
+                                <input type="search" id="search-box" class="form-control ps-5"
+                                    aria-controls="table_config" placeholder="Search Product..." />
                                 <i
                                     class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                             </div>
                         </div>
                         <div
                             class="col-md-8 col-xl-9 text-end d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                            <a class="btn btn-nav-link" href="{{ route('cart.history') }}">
+                            <a class="btn btn-nav-link" href="{{ route('cart') }}">
                                 <i class="fas fa-shopping-cart"></i>&nbsp;
-                                History
+                                Keranjang
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            @if (count($product) > 0)
+            @if (count($order) > 0)
                 <div class="card bg-transparent border-0 rounded-0">
                     <div class="card">
                         <div class="card-body">
@@ -280,58 +227,20 @@
                                     <thead class="header-item">
                                         <tr>
                                             <th>No</th>
-                                            <th>Name Product</th>
-                                            <th>Unit</th>
-                                            <th>Category</th>
-                                            <th>Amount</th>
-                                            <th>Price</th>
-                                            <th>Image</th>
+                                            <th>Status</th>
+                                            <th>alamat</th>
+                                            <th>bukti</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($product as $key => $result)
+                                        @foreach ($order as $result)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ App\Models\Catalog::find($key)->name }}</td>
-                                                <td>{{ App\Models\Catalog::find($key)->fabric }}</td>
-                                                <td>{{ App\Models\Catalog::find($key)->category->name }}</td>
+                                                <td>{{$result->status }}</td>
+                                                <td>{{$result->alamat}}</td>
                                                 <td>
-                                                    <form
-                                                        action="{{ route('cart.add', App\Models\Catalog::find($key)->id) }}"
-                                                        method="post" class="d-inline">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button type="submit" class="btn btn-sm btn-black"
-                                                            onclick="return confirm('Are you sure?')">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor"
-                                                                class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
-                                                            </svg>
-                                                        </button>
-                                                    </form>
-                                                    {{ $result }}
-                                                    <form
-                                                        action="{{ route('cart.minus', App\Models\Catalog::find($key)->id) }}"
-                                                        method="post" class="d-inline">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button type="submit" class="btn btn-sm btn-black"
-                                                            onclick="return confirm('Are you sure?')">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                height="16" fill="currentColor"
-                                                                class="bi bi-dash-square-fill" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z" />
-                                                            </svg>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                                <td>{{ App\Models\Catalog::find($key)->price * $result }}</td>
-                                                <td>
-                                                    <img src="{{ asset('uploads/catalog/image/' . App\Models\Catalog::find($key)->image) }}"
-                                                        alt="{{ App\Models\Catalog::find($key)->name }}"
+                                                    <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
+                                                        alt="bukti"
                                                         class="img-fluid rounded" width="100" height="100">
                                                 </td>
 
@@ -340,18 +249,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-shop" data-bs-target="#staticBackdrop" disabled>
-                                    Total : Rp. {{ $total }}
-                                </button>
-                            </div>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-shop" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
-                                    <i class="fa fa-shop"></i> Order Now
-                                </button>
-                            </div>
-
                         </div>
                     </div>
                 </div>

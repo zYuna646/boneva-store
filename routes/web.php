@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MainSliderController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymenController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\ReviewSliderController;
 use App\Http\Controllers\VideoController;
@@ -39,8 +40,12 @@ Route::post('/register/create', [registerController::class, 'store'])->name('reg
 
 Route::post('/catalog/order/{id}', [OrderController::class, 'order'])->name('catalog.order');
 Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
-Route::post('/cart/add/{id}', [OrderController::class, 'add'])->name('cart.add');
-Route::post('/cart/minus/{id}', [OrderController::class, 'minus'])->name('cart.minus');
+Route::put('/cart/add/{id}', [OrderController::class, 'add'])->name('cart.add');
+Route::get('/cart/history', [OrderController::class, 'history'])->name('cart.history');
+
+Route::put('/cart/minus/{id}', [OrderController::class, 'minus'])->name('cart.minus');
+Route::post('/cart/confirmation/{id}', [OrderController::class, 'confirmation'])->name('cart.cofirmation');
+
 
 
 
@@ -82,6 +87,18 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::delete('/admin/catalog/{id}/delete', [CatalogController::class, 'destroy'])->name('admin.catalog.delete');
     Route::delete('/admin/catalog/{id}/delete-image', [CatalogController::class, 'destroyImage'])->name('admin.catalog.delete-image');
 
+    Route::get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
+    Route::get('/admin/order/history', [OrderController::class, 'send'])->name('admin.history');
+    Route::get('/admin/order/add', [OrderController::class, 'create'])->name('admin.order.create');
+    Route::post('/admin/order/store', [OrderController::class, 'store'])->name('admin.order.store');
+    Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('admin.order.show');
+    Route::get('/admin/order/history/{id}/show', [OrderController::class, 'show'])->name('admin.history.show');
+    Route::put('/admin/order/{id}/verified', [OrderController::class, 'verified'])->name('admin.order.verified');
+    Route::get('/admin/order/{id}/edit', [OrderController::class, 'edit'])->name('admin.order.edit');
+    Route::put('/admin/order/{id}/update', [OrderController::class, 'update'])->name('admin.order.update');
+    Route::delete('/admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('admin.order.delete');
+    Route::delete('/admin/order/{id}/delete-image', [OrderController::class, 'destroyImage'])->name('admin.order.delete-image');
+
     Route::get('/admin/gallery', [CatalogController::class, 'gallery'])->name('admin.gallery');
 
     Route::get('/admin/video', [VideoController::class, 'index'])->name('admin.video');
@@ -112,6 +129,7 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::put('/admin/about-us/{id}/update', [AboutUsController::class, 'update'])->name('admin.about-us.update');
 
     Route::get('/admin/account-setting', [AdminController::class, 'accountSetting'])->name('admin.account-setting');
+    Route::put('/admin/payment', [AdminController::class, 'payment'])->name('admin.payment');
     Route::put('/admin/change-password/{id}', [AdminController::class, 'changePassword'])->name('admin.change-password');
     Route::put('/admin/change-information/{id}', [AdminController::class, 'changeInformation'])->name('admin.change-information');
 

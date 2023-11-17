@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalog;
 use App\Models\Category;
 use App\Models\Information;
+use App\Models\Paymen;
 use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -42,7 +43,28 @@ class AdminController extends Controller
             'title' => 'Account Setting',
             'subtitle' => '',
             'active' => 'account-setting',
+            'payment' => Paymen::first(),
         ]);
+    }
+
+    public function payment(Request $request)
+    {
+        $this->validate($request, [
+           'bank' => 'required',
+           'rekening' => 'required',
+           'pemilik' => 'required'
+        ], [
+
+        ]);
+
+        $payment = Paymen::first();
+        $payment->update([
+            'bank' => $request->bank,
+            'nomor_rekening' => $request->rekening,
+            'pemilik_rekening' => $request->pemilik,
+        ]);
+
+        return redirect()->back()->with('success', 'Payement Information been changed');
     }
 
     public function changePassword(Request $request, $id)

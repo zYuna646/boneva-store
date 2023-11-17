@@ -64,6 +64,22 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'order') active @endif" href="{{ route('admin.order') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">Order</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'history') active @endif" href="{{ route('admin.history') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">History Order</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link @if ($active == 'information') active @endif" href="{{ route('admin.information') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-news"></i>

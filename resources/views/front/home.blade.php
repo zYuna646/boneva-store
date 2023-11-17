@@ -88,7 +88,7 @@
                 <div class="col-12">
                     <div class="content-title" data-aos="fade-down">
                         <div class="text-center">
-                            <h2 class="mb-3">Gallery</h2>
+                            <h2 class="mb-3">Catalog</h2>
                             <p class="mb-5">Related about &nbsp;<img src="{{ asset('assets/front/img/logo.jpg') }}"
                                     alt="logo" width="120px"></p>
                         </div>
