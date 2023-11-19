@@ -45,7 +45,7 @@
     </div>
 
     <div class="card">
-        <form action="{{ route('admin.account.store') }}" method="post">
+        <form action="{{ route('admin.account.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <h5 class="mb-3">{{ $subtitle }} Form</h5>
@@ -53,15 +53,14 @@
                     <div class="col-12">
                         <div>
                             <label class="control-label mb-1">Role <span class="text-danger">*</span></label>
-                            <select name="role"
-                                class="form-control form-select @error('role') is-invalid @enderror">
+                            <select name="role" class="form-control form-select @error('role') is-invalid @enderror">
                                 <option value="" selected hidden>-- Select Role --</option>
-                                    <option value="admin">
-                                        admin
-                                    </option>
-                                    <option value="admin">
-                                        agen
-                                    </option>
+                                <option value="admin">
+                                    admin
+                                </option>
+                                <option value="agen">
+                                    agen
+                                </option>
                             </select>
                             @error('role')
                                 <small class="invalid-feedback">
@@ -80,6 +79,56 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label class="control-label mb-1">Nomor KTP</label>
+                            <input type="text" name="no_ktp" class="form-control @error('no_ktp') is-invalid @enderror"
+                                placeholder="" value="{{ old('no_ktp') }}" />
+                            @error('no_ktp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">NPWP</label>
+                            <input type="text" name="npwp" class="form-control @error('npwp') is-invalid @enderror"
+                                placeholder="" value="{{ old('npwp') }}" />
+                            @error('npwp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">No Telepon</label>
+                            <input type="text" name="no_telp" class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="08*****12" value="{{ old('no_telp') }}" />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">No WA</label>
+                            <input type="text" name="no_wa" class="form-control @error('no_wa') is-invalid @enderror"
+                                placeholder="08*****12" value="{{ old('no_wa') }}" />
+                            @error('no_wa')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Image <span class="text-danger">*</span></label>
+                            <input type="file" name="image"
+                                class="form-control @error('image') is-invalid @enderror" />
+                            @error('image')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label class="control-label mb-1">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
                                 placeholder="email@example.com" value="{{ old('email') }}" />
@@ -89,6 +138,7 @@
                                 </small>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label class="control-label mb-1">Password</label>
                             <div class="shbtn-group">
@@ -159,7 +209,7 @@
                 }
             });
 
-            $('input[name="new_passwordd"], input[name="confirm_new_password"]').on('keyup', function () {
+            $('input[name="new_passwordd"], input[name="confirm_new_password"]').on('keyup', function() {
                 var password = $('input[name="new_password"]').val();
                 var confirmPassword = $('input[name="confirm_new_password"]').val();
 

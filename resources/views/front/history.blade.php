@@ -195,6 +195,23 @@
         </div>
     </header>
 
+    @if (count($order) > 0)
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Order</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <section class="product-detail">
         <div class="container">
             <div class="card">
@@ -202,8 +219,8 @@
                     <div class="row">
                         <div class="col-md-4 col-xl-3">
                             <div id="table_config_filter" class="position-relative">
-                                <input type="search" id="search-box" class="form-control ps-5"
-                                    aria-controls="table_config" placeholder="Search Product..." />
+                                <input type="search" id="search-box" class="form-control ps-5" aria-controls="table_config"
+                                    placeholder="Search Product..." />
                                 <i
                                     class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                             </div>
@@ -236,12 +253,12 @@
                                         @foreach ($order as $result)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{$result->status }}</td>
-                                                <td>{{$result->alamat}}</td>
+                                                <td>{{ $result->status }}</td>
+                                                <td>{{ $result->alamat }}</td>
                                                 <td>
                                                     <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
-                                                        alt="bukti"
-                                                        class="img-fluid rounded" width="100" height="100">
+                                                        alt="bukti" class="img-fluid rounded" width="100"
+                                                        height="100">
                                                 </td>
 
                                             </tr>

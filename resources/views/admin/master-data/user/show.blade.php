@@ -54,7 +54,7 @@
                         <div class="mb-3">
                             <label class="control-label mb-1">Role</label>
                             <input type="text" name="role" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="John Doe" value="{{ $data->role }}" disabled/>
+                                placeholder="John Doe" value="{{ $data->role }}" disabled />
                             @error('role')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label class="control-label mb-1">Name</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="John Doe" value="{{ $data->name }}" disabled/>
+                                placeholder="John Doe" value="{{ $data->name }}" disabled />
                             @error('name')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -72,9 +72,63 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label class="control-label mb-1">No Telepon</label>
+                            <input type="text" name="name" class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="John Doe" value="{{ $data->no_telp }}" disabled />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Nomor KTP</label>
+                            <input type="text" name="name" class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="John Doe" value="{{ $data->no_ktp }}" disabled />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">NPWP</label>
+                            <input type="text" name="name" class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="John Doe" value="{{ $data->npwp }}" disabled />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">No WA</label>
+                            <input type="text" name="name" class="form-control @error('no_wa') is-invalid @enderror"
+                                placeholder="John Doe" value="{{ $data->no_wa }}" disabled />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Foto Agen</label>
+                            <input type="text" name="name" class="form-control @error('no_wa') is-invalid @enderror"
+                                placeholder="John Doe" value="{{ $data->foto_agen }}" disabled />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                            <img src="{{ asset('uploads/catalog/image/' . $data->foto_agen) }}" alt="{{ $data->name }}"
+                                class="img-fluid rounded" width="300" height="250">
+                        </div>
+
+                        <div class="mb-3">
                             <label class="control-label mb-1">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="email@example.com" value="{{ $data->email }}" disabled/>
+                                placeholder="email@example.com" value="{{ $data->email }}" disabled />
                             @error('email')
                                 <small class="invalid-feedback">
                                     {{ $message }}

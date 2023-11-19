@@ -146,7 +146,7 @@ class OrderController extends Controller
             'status' => 'order'
         ]);
 
-        return redirect('cart.history');
+        return redirect()->route('cart.history');
     }
 
     public function minus(Request $request, $id)
@@ -175,13 +175,13 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($method)
     {
         return view('admin.master-data.order.index', [
-            'title' => 'Order',
+            'title' => 'Order '.$method,
             'subtitle' => '',
-            'active' => 'order',
-            'datas' => Order::Where('status', 'order')->get(),
+            'active' => $method,
+            'datas' => Order::Where('status', 'order')->where('method', $method)->get(),
         ]);
     }
 

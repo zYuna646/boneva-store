@@ -87,7 +87,7 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::delete('/admin/catalog/{id}/delete', [CatalogController::class, 'destroy'])->name('admin.catalog.delete');
     Route::delete('/admin/catalog/{id}/delete-image', [CatalogController::class, 'destroyImage'])->name('admin.catalog.delete-image');
 
-    Route::get('/admin/order', [OrderController::class, 'index'])->name('admin.order');
+    Route::get('/admin/order/{method}', [OrderController::class, 'index'])->name('admin.order');
     Route::get('/admin/order/history', [OrderController::class, 'send'])->name('admin.history');
     Route::get('/admin/order/add', [OrderController::class, 'create'])->name('admin.order.create');
     Route::post('/admin/order/store', [OrderController::class, 'store'])->name('admin.order.store');

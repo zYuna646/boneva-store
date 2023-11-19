@@ -37,8 +37,7 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="{{ url('/') }}" class="text-nowrap logo-img text-center d-block mb-5 w-100">
-                                    <img src="{{ asset('assets/front/img/logo.jpg') }}"
-                                        width="180" alt="">
+                                    <img src="{{ asset('assets/front/img/logo.jpg') }}" width="180" alt="">
                                 </a>
                                 <div class="position-relative text-center my-4">
                                     <p class="mb-0 fs-4 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">
@@ -46,31 +45,93 @@
                                     <span
                                         class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                                 </div>
-                                <form action="{{ route('register.store') }}" method="post">
+                                <form action="{{ route('register.store') }}" method="post"  enctype="multipart/form-data">
                                     @csrf
-                                    <div class="mb-3">
+                                    <div class="mb-1">
                                         <label for="exampleInputName" class="form-label">Name</label>
-                                        <input type="text" name="name" 
+                                        <input type="text" name="name"
                                             class="form-control 
                                             @error('name')
                                                 is-invalid
-                                            @enderror" 
-                                            id="exampleInputName"
-                                            placeholder="John Doe">
+                                            @enderror"
+                                            id="exampleInputName" placeholder="John Doe">
                                         @error('name')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
+
+                                     <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">Nomor KTP</label>
+                                        <input type="text" name="no_ktp"
+                                            class="form-control 
+                                            @error('no_ktp')
+                                                is-invalid
+                                            @enderror"
+                                            id="exampleInputName" placeholder="">
+                                        @error('no_ktp')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">NPWP</label>
+                                        <input type="text" name="npwp"
+                                            class="form-control 
+                                            @error('npwp')
+                                                is-invalid
+                                            @enderror"
+                                            id="exampleInputName" placeholder="">
+                                        @error('npwp')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">No Telepon</label>
+                                        <input type="text" name="no_telp"
+                                            class="form-control 
+                                            @error('no_telp')
+                                                is-invalid
+                                            @enderror"
+                                            id="exampleInputName" placeholder="08******12">
+                                        @error('no_telp')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">Foto Agen</label>
+                                        <input type="file" name="image"
+                                            class="form-control @error('image') is-invalid @enderror" />
+                                        @error('image')
+                                            <small class="invalid-feedback">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleInputName" class="form-label">No WA</label>
+                                        <input type="text" name="no_wa"
+                                            class="form-control 
+                                            @error('no_wa')
+                                                is-invalid
+                                            @enderror"
+                                            id="exampleInputName" placeholder="08******12">
+                                        @error('no_telp')
+                                            <div class="text-danger small">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email</label>
-                                        <input type="email" name="email" 
+                                        <input type="email" name="email"
                                             class="form-control 
                                             @error('email')
                                                 is-invalid
-                                            @enderror" 
-                                            id="exampleInputEmail1"
-                                            aria-describedby="emailHelp" placeholder="example@email.com">
+                                            @enderror"
+                                            id="exampleInputEmail1" aria-describedby="emailHelp"
+                                            placeholder="example@email.com">
                                         @error('email')
                                             <div class="text-danger small">{{ $message }}</div>
                                         @enderror
@@ -80,13 +141,12 @@
                                         <div class="mb-3" id="show_hide_password">
                                             <label for="exampleInputPassword1" class="form-label">Password</label>
                                             <div class="shbtn-group">
-                                                <input type="password" name="password" 
-                                                class="form-control 
+                                                <input type="password" name="password"
+                                                    class="form-control 
                                                 @error('password')
                                                     is-invalid
                                                 @enderror"
-                                                    id="exampleInputPassword1" 
-                                                    placeholder="Enter password">
+                                                    id="exampleInputPassword1" placeholder="Enter password">
                                                 <span class="shbtn">
                                                     <i class="ti ti-eye-off"></i>
                                                 </span>
@@ -99,15 +159,15 @@
                                     <div class="mb-4">
                                         <!-- Show Hide Password -->
                                         <div class="mb-3" id="show_hide_password_confirm">
-                                            <label for="exampleInputPasswordConfirmation" class="form-label">Konfirmasi Password</label>
+                                            <label for="exampleInputPasswordConfirmation" class="form-label">Konfirmasi
+                                                Password</label>
                                             <div class="shbtn-group">
-                                                <input type="password" name="password_confirmation" 
+                                                <input type="password" name="password_confirmation"
                                                     class="form-control 
                                                     @error('password_confirmation')
                                                         is-invalid
                                                     @enderror"
-                                                    id="exampleInputPasswordConfirmation" 
-                                                    placeholder="Konfirmasi password">
+                                                    id="exampleInputPasswordConfirmation" placeholder="Konfirmasi password">
                                                 <span class="shbtn">
                                                     <i class="ti ti-eye-off"></i>
                                                 </span>
@@ -117,8 +177,9 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    
-                                    <button type="submit" class="btn btn-dark w-100 py-8 rounded-2" disabled id="submitBtn">Register</button>
+
+                                    <button type="submit" class="btn btn-dark w-100 py-8 rounded-2" disabled
+                                        id="submitBtn">Register</button>
                                 </form>
                             </div>
                         </div>
@@ -146,7 +207,7 @@
                 }
             });
 
-            $('input[name="password"], input[name="password_confirmation"]').on('keyup', function () {
+            $('input[name="password"], input[name="password_confirmation"]').on('keyup', function() {
                 var password = $('input[name="password"]').val();
                 var confirmPassword = $('input[name="password_confirmation"]').val();
 

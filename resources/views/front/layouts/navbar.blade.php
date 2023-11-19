@@ -81,11 +81,32 @@
                     @endif
 
                     @auth
-                        <a class="btn btn-nav-link2" href="{{ route('admin.dashboard') }}">
-                            Back to Dashboard &nbsp;
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+                        @if (auth()->user()->role == 'admin')
+                            <a class="btn btn-nav-link2" href="{{ route('admin.dashboard') }}">
+                                Back to Dashboard &nbsp;
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        @else
+                            <form action="{{ route('logout') }}" method="post" class="d-inline">
+                                @csrf
+                                @method('post')
+
+                                <button type="submit" class="btn btn-sm btn-black"
+                                    onclick="return confirm('Are you sure you want to logout?')">
+                                    <span class="sr-only">Logout</span>
+                                    <span class="btn-text">Logout</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+                        @endif
                     @endauth
+
+                    @guest
+                        <a class="btn btn-nav-link" href="{{ route('login') }}">
+                            <i class="fas fa-user"></i>&nbsp;
+                            Login
+                        </a>
+                    @endguest
                 </div>
             @endif
         </div>

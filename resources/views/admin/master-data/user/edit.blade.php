@@ -71,8 +71,28 @@
                         <div class="mb-3">
                             <label class="control-label mb-1">Name</label>
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="John Doe" value="{{ old('name', $data->name ?? '' ) }}" />
+                                placeholder="John Doe" value="{{ old('name', $data->name ?? '') }}" />
                             @error('name')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Nomor KTP</label>
+                            <input type="text" name="no_ktp" class="form-control @error('no_ktp') is-invalid @enderror"
+                                placeholder="" value="{{ old('no_ktp', $data->no_ktp ?? '') }}" />
+                            @error('no_ktp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">NPWP</label>
+                            <input type="text" name="npwp" class="form-control @error('npwp') is-invalid @enderror"
+                                placeholder="" value="{{ old('npwp', $data->npwp ?? '') }}" />
+                            @error('npwp')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
@@ -81,12 +101,43 @@
                         <div class="mb-3">
                             <label class="control-label mb-1">Email</label>
                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
-                                placeholder="email@example.com" value="{{ old('email' , $data->email ?? '') }}" />
+                                placeholder="email@example.com" value="{{ old('email', $data->email ?? '') }}" />
                             @error('email')
                                 <small class="invalid-feedback">
                                     {{ $message }}
                                 </small>
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">No Telepon</label>
+                            <input type="text" name="name" class="form-control @error('no_telp') is-invalid @enderror"
+                                placeholder="08*****12" value="{{ old('no_telp', $data->no_telp ?? '') }}" />
+                            @error('no_telp')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">No WA</label>
+                            <input type="text" name="name" class="form-control @error('no_wa') is-invalid @enderror"
+                                placeholder="08*****12" value="{{ old('no_wa', $data->no_wa ?? '') }}" />
+                            @error('no_wa')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Image <span class="text-danger">*</span></label>
+                            <input type="file" name="image"
+                                class="form-control @error('image') is-invalid @enderror" />
+                            @error('image')
+                                <small class="invalid-feedback">
+                                    {{ $message }}
+                                </small>
+                            @enderror
+                            
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Password</label>
@@ -158,7 +209,7 @@
                 }
             });
 
-            $('input[name="new_passwordd"], input[name="confirm_new_password"]').on('keyup', function () {
+            $('input[name="new_passwordd"], input[name="confirm_new_password"]').on('keyup', function() {
                 var password = $('input[name="new_password"]').val();
                 var confirmPassword = $('input[name="confirm_new_password"]').val();
 
@@ -171,4 +222,3 @@
         });
     </script>
 @endpush
-

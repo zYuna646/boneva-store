@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('no_telp');
+            $table->string('no_ktp')->default('');
+            $table->string('npwp')->default('');
+            $table->string('no_wa');
+            $table->string('foto_agen')->default('');
             $table->boolean('verified')->default(true);
             $table->enum('role', ['agen','admin'])->default('agen');
             $table->string('email')->unique();

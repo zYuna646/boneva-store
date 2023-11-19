@@ -25,7 +25,7 @@
                 <div class="col-md-4 col-xl-3">
                     <div id="table_config_filter" class="position-relative">
                         <input type="search" id="search-box" class="form-control ps-5" aria-controls="table_config"
-                            placeholder="Search Category..." />
+                            placeholder="Search Account..." />
                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                     </div>
                 </div>
@@ -65,6 +65,11 @@
                                 <th>No</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Nomor KTP</th>
+                                <th>NPWP</th>
+                                <th>No Telepon</th>
+                                <th>No WA</th>
+                                <th>Foto Agen</th>
                                 <th>role</th>
                                 <th>Verified</th>
                                 <th>Action</th>
@@ -76,10 +81,19 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $result->name }}</td>
                                     <td>{{ $result->email }}</td>
+                                    <td>{{ $result->no_ktp }}</td>
+                                    <td>{{ $result->npwp }}</td>
+                                    <td>{{ $result->no_telp }}</td>
+                                    <td>{{ $result->no_wa }}</td>
+                                    <td>
+                                        <img src="{{ asset('uploads/catalog/image/' . $result->foto_agen) }}"
+                                            alt="{{ $result->name }}" class="img-fluid rounded" width="100"
+                                            height="100">
+                                    </td>
                                     <th>{{ $result->role }}</th>
                                     <td>
-                                        <form action="{{ route('admin.account.verified', $result->id) }}"
-                                            method="post" class="d-inline">
+                                        <form action="{{ route('admin.account.verified', $result->id) }}" method="post"
+                                            class="d-inline">
                                             @csrf
                                             @method('put')
                                             <button type="submit"

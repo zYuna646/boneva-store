@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'verified' => true,
             'role' => 'admin',
+            'no_telp' => '00000',
+            'no_wa' => '0000',
             'password' => '12345'
         ]);
     }

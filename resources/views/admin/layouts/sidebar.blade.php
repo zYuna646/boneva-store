@@ -20,7 +20,8 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'dashboard') active @endif" href="{{ route('admin.dashboard') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'dashboard') active @endif"
+                        href="{{ route('admin.dashboard') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
@@ -32,7 +33,8 @@
                     <span class="hide-menu">Master Data</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'account') active @endif" href="{{ route('admin.account') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'account') active @endif"
+                        href="{{ route('admin.account') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user"></i>
                         </span>
@@ -40,7 +42,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'category') active @endif" href="{{ route('admin.category') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'category') active @endif"
+                        href="{{ route('admin.category') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-category-2"></i>
                         </span>
@@ -48,7 +51,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'catalog') active @endif" href="{{ route('admin.catalog') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'catalog') active @endif"
+                        href="{{ route('admin.catalog') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-brand-appgallery"></i>
                         </span>
@@ -56,31 +60,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'video') active @endif" href="{{ route('admin.video') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-brand-youtube"></i>
-                        </span>
-                        <span class="hide-menu">Video</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'order') active @endif" href="{{ route('admin.order') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-news"></i>
-                        </span>
-                        <span class="hide-menu">Order</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'history') active @endif" href="{{ route('admin.history') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-news"></i>
-                        </span>
-                        <span class="hide-menu">History Order</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'information') active @endif" href="{{ route('admin.information') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'information') active @endif"
+                        href="{{ route('admin.information') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-news"></i>
                         </span>
@@ -89,10 +70,52 @@
                 </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">Order</span>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'bank') active @endif"
+                        href="{{ route('admin.order',  'bank') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">Bank</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'cash') active @endif"
+                        href="{{ route('admin.order', 'cash') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">Cash</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'cod') active @endif"
+                        href="{{ route('admin.order', 'cod') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">COD</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'history') active @endif"
+                        href="{{ route('admin.history') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-news"></i>
+                        </span>
+                        <span class="hide-menu">History Order</span>
+                    </a>
+                </li>
+               
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Settings</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'about-us') active @endif" href="{{ route('admin.about-us') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'about-us') active @endif"
+                        href="{{ route('admin.about-us') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-info-hexagon"></i>
                         </span>
@@ -100,7 +123,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'main-slider') active @endif" href="{{ route('admin.main-slider') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'main-slider') active @endif"
+                        href="{{ route('admin.main-slider') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-slideshow"></i>
                         </span>
@@ -108,7 +132,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'review-slider') active @endif" href="{{ route('admin.review-slider') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'review-slider') active @endif"
+                        href="{{ route('admin.review-slider') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-slideshow"></i>
                         </span>
@@ -116,7 +141,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'account-setting') active @endif" href="{{ route('admin.account-setting') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'account-setting') active @endif"
+                        href="{{ route('admin.account-setting') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-user-cog"></i>
                         </span>
