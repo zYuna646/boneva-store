@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img src="{{ asset('assets/front/img/logo.jpg') }}" alt="Logo" />
+        <a  href="{{ url('/') }}">
+            <img src="{{ asset('assets/front/img/logo.png') }}" style="width: 100" height="100" alt="Logo" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,26 +9,48 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             @if (Route::is('home'))
-                <ul class="navbar-nav m-auto gap-0 gap-lg-2">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about-us">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#gallery">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#videos">Videos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#information">Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact-us">Contact Us</a>
-                    </li>
-                </ul>
+            <ul class="nav">
+                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+                <li class="scroll-to-section"><a href="#services">Catalog</a></li>
+                <li class="scroll-to-section"><a href="#contact-section">Keranjang</a></li>
+                <li class="scroll-to-section"><a href="#contact-section">History</a></li>
+                <li class="scroll-to-section"><a href="#testimonials">Testimonials</a></li>
+                <li class="scroll-to-section"><a href="#contact-section">Contact Us</a></li>
+                @auth
+                    @if (auth()->user()->role == 'admin')
+                        <li class="scroll-to-section"> <a href="{{ route('admin.dashboard') }}">
+                                Back to Dashboard &nbsp;
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a></li>
+                    @else
+                        <li class="scroll-to-section">
+                            <form action="{{ route('logout') }}" method="post" class="d-inline">
+                                @csrf
+                                @method('post')
+
+                                <button type="submit"
+                                    style="color: #fff; background-color: transparent; border-radius: 10px;"
+                                    onclick="return confirm('Are you sure you want to logout?')">
+                                    <span class="sr-only">Logout</span>
+                                    <span class="btn-text">Logout</span>
+                                    <i class="fa-solid fa-user"></i>
+                                </button>
+
+                            </form>
+                        </li>
+                    @endif
+                @endauth
+
+
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-nav-link"
+                        style="color: #fff; background-color: transparent; border-radius: 10px;">
+                        <i class="fas fa-user"></i>&nbsp;
+                        Login
+                    </a>
+                @endguest
+            </ul>
+
 
                 <div>
                     <a class="btn btn-nav-link" href="{{ route('catalog') }}">

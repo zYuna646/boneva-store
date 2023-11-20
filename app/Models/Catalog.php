@@ -20,6 +20,13 @@ class Catalog extends Model
         'fabric',
     ];
 
+
+    public function orders()
+    {
+        return Order::whereJsonContains('items', [$this->id => ['$exists' => true]])
+            ->where('status', 'success');
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['category'] ?? false, function($query, $category) {

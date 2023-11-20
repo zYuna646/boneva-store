@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Paymen;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,12 @@ class DatabaseSeeder extends Seeder
             'no_telp' => '00000',
             'no_wa' => '0000',
             'password' => '12345'
+        ]);
+
+        Paymen::create([
+            'bank' => 'bni',
+            'nomor_rekening' => '120121012',
+            'pemilik_rekening' => 'john doe',
         ]);
     }
 }

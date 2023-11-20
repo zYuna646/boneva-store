@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Paymen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -65,10 +66,10 @@ class OrderController extends Controller
                 $total += Catalog::find($key)->price * $value;
             }
         } catch (\Throwable $th) {
-           $product = [];
-           $total = 0;
+            $product = [];
+            $total = 0;
         }
-       
+
 
 
         return view('front.cart', [
@@ -88,7 +89,7 @@ class OrderController extends Controller
             return redirect('login')->with('failed', 'Login Terlebih Dahulu');
         }
         $cartOrder = Order::where('user_id', auth()->user()->id)
-            ->where('status', '<>' ,'cart')
+            ->where('status', '<>', 'cart')
             ->get();
 
         return view('front.history', [
@@ -125,9 +126,46 @@ class OrderController extends Controller
             return redirect('login')->with('failed', 'Login Terlebih Dahulu');
         }
 
-        $this->validate($request, 
+        if ($request->category_id == 'bank') {
+
+            $order = Order::findOrFail($id);
+
+            $image = $request->file('image');
+            $image_name = time() . '-' . rand(1, 100) . '-' . $id . '.' . $image->extension();
+            $image->move(public_path('uploads/catalog/image'), $image_name);
+
+            $order->update([
+                'alamat' => $request->alamat_bank,
+                'bukti' => $image_name,
+                'status' => 'order',
+                'method' => $request->category_id,
+            ]);
+
+
+        } else if ($request->category_id == 'cod') {
+            $order = Order::findOrFail($id);
+
+            $order->update([
+                'alamat' => $request->alamat_cod,
+                'status' => 'order',
+                'method' => $request->category_id,
+            ]);
+
+        }
+
+        return redirect()->route('cart.history');
+    }
+
+    public function cod(Request $request, $id)
+    {
+        if (!Auth::check()) {
+            return redirect('login')->with('failed', 'Login Terlebih Dahulu');
+        }
+
+
+        $this->validate(
+            $request,
             [
-                'alamat' => 'required',
                 'image' => 'required|image|mimes:png,jpg,jpeg',
             ],
             [
@@ -141,9 +179,7 @@ class OrderController extends Controller
         $image->move(public_path('uploads/catalog/image'), $image_name);
 
         $order->update([
-            'alamat' => $request->alamat,
             'bukti' => $image_name,
-            'status' => 'order'
         ]);
 
         return redirect()->route('cart.history');
@@ -171,31 +207,31 @@ class OrderController extends Controller
 
         return redirect('cart');
     }
-
     /**
      * Display a listing of the resource.
      */
     public function index($method)
     {
         return view('admin.master-data.order.index', [
-            'title' => 'Order '.$method,
+            'title' => 'Order ' . $method,
             'subtitle' => '',
             'active' => $method,
             'datas' => Order::Where('status', 'order')->where('method', $method)->get(),
+            'route' => 'order'
         ]);
     }
 
     public function verified($id)
     {
         $order = Order::findOrFail($id);
-    
+
         $order->update([
             'status' => 'success',
         ]);
-    
+
         $message = 'Order has been verified';
-    
-        return redirect()->route('admin.order')->with('success', $message);
+
+        return redirect()->route('admin.history')->with('success', $message);
     }
 
     /**
@@ -292,7 +328,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $cartOrder = Order::findOrFail($id);   
+        $cartOrder = Order::findOrFail($id);
         try {
             $product = json_decode($cartOrder->items, true);
 
@@ -301,11 +337,68 @@ class OrderController extends Controller
                 $total += Catalog::find($key)->price * $value;
             }
         } catch (\Throwable $th) {
-           $product = [];
-           $total = 0;
+            $product = [];
+            $total = 0;
         }
 
         return view('admin.master-data.order.show', [
+            'title' => 'Order',
+            'subtitle' => 'order Detail',
+            'active' => 'order',
+            'data' => Order::findOrFail($id),
+            'product' => $product,
+            'total' => $total,
+            'order' => $cartOrder
+        ]);
+    }
+
+    public function report()
+    {
+        $order = Order::Where('status', 'success')->get();
+        $catalog = Catalog::all();
+
+        $jumlah = [];
+
+        foreach ($catalog as $item) {
+            $jumlah[$item->id] = 0;
+            foreach ($order as $result) {
+                $json = json_decode($result->items, true);
+                try {
+                    $jumlah[$item->id] = $json[$item->id];
+                    +$jumlah[$item->id];
+                } catch (\Throwable $th) {
+
+                }
+            }
+        }
+
+
+        $data = [
+            'catalog' => $catalog,
+            'jumlah' => $jumlah,
+        ];
+
+        $pdf = PDF::loadView('admin.master-data.order.report')->setPaper('a4', 'portrait');
+        return $pdf->download('contoh.pdf');
+
+    }
+
+    public function show_order($id)
+    {
+        $cartOrder = Order::findOrFail($id);
+        try {
+            $product = json_decode($cartOrder->items, true);
+
+            $total = 0;
+            foreach ($product as $key => $value) {
+                $total += Catalog::find($key)->price * $value;
+            }
+        } catch (\Throwable $th) {
+            $product = [];
+            $total = 0;
+        }
+
+        return view('front.show', [
             'title' => 'Order',
             'subtitle' => 'order Detail',
             'active' => 'order',

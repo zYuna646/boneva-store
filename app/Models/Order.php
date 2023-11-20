@@ -14,6 +14,12 @@ class Order extends Model
         'status',
         'items',
         'alamat',
-        'bukti'
+        'bukti',
+        'method',
     ];
+
+    public function catalog()
+    {
+        return $this->belongsTo(Catalog::class);
+    }
 }

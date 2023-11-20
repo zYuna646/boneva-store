@@ -42,9 +42,11 @@ Route::post('/catalog/order/{id}', [OrderController::class, 'order'])->name('cat
 Route::get('/cart', [OrderController::class, 'cart'])->name('cart');
 Route::put('/cart/add/{id}', [OrderController::class, 'add'])->name('cart.add');
 Route::get('/cart/history', [OrderController::class, 'history'])->name('cart.history');
+Route::get('/cart/history/show/{id}', [OrderController::class, 'show_order'])->name('cart.show');
 
 Route::put('/cart/minus/{id}', [OrderController::class, 'minus'])->name('cart.minus');
 Route::post('/cart/confirmation/{id}', [OrderController::class, 'confirmation'])->name('cart.cofirmation');
+Route::post('/cart/cod/{id}', [OrderController::class, 'cod'])->name('cart.cod');
 
 
 
@@ -88,7 +90,7 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::delete('/admin/catalog/{id}/delete-image', [CatalogController::class, 'destroyImage'])->name('admin.catalog.delete-image');
 
     Route::get('/admin/order/{method}', [OrderController::class, 'index'])->name('admin.order');
-    Route::get('/admin/order/history', [OrderController::class, 'send'])->name('admin.history');
+    Route::get('/admin/history', [OrderController::class, 'send'])->name('admin.history_order');
     Route::get('/admin/order/add', [OrderController::class, 'create'])->name('admin.order.create');
     Route::post('/admin/order/store', [OrderController::class, 'store'])->name('admin.order.store');
     Route::get('/admin/order/{id}/show', [OrderController::class, 'show'])->name('admin.order.show');
@@ -98,6 +100,7 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::put('/admin/order/{id}/update', [OrderController::class, 'update'])->name('admin.order.update');
     Route::delete('/admin/order/{id}/delete', [OrderController::class, 'destroy'])->name('admin.order.delete');
     Route::delete('/admin/order/{id}/delete-image', [OrderController::class, 'destroyImage'])->name('admin.order.delete-image');
+    Route::get('/admin/report', [OrderController::class, 'report'])->name('admin.report_history');
 
     Route::get('/admin/gallery', [CatalogController::class, 'gallery'])->name('admin.gallery');
 

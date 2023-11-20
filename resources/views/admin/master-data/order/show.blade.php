@@ -33,13 +33,12 @@
         <div class="card-body px-4 py-3">
             <h4 class="fw-semibold mb-8">{{ $title ?? '' }}</h4>
             <nav aria-label="breadcrumb">
+                
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="{{ route('admin.dashboard') }}" class="text-muted">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ route('admin.' . $active) }}" class="text-muted">{{ $title ?? '' }}</a>
-                    </li>
+                    
                     <li class="breadcrumb-item active" aria-current="page">{{ $subtitle ?? '' }}</li>
                 </ol>
             </nav>
@@ -49,7 +48,6 @@
     <div class="shop-detail">
         <div class="card shadow-none border">
             <div class="card-body p-4">
-                <a href="{{ route('admin.' . $active) }}" class="btn btn-sm btn-dark mb-3"><i class="ti ti-arrow-left"></i> Back to {{ $title ?? '' }}</a>
 
                 <div class="card-body">
                     <div class="table-responsive">
@@ -78,7 +76,7 @@
                                         </td>
                                         <td>{{ App\Models\Catalog::find($key)->price * $result }}</td>
                                         <td>
-                                            <img src="{{ asset('uploads/catalog/image/' . App\Models\Catalog::find($key)->image) }}"
+                                            <img style="width: 100px; height:85px" src="{{ asset('uploads/catalog/image/' . App\Models\Catalog::find($key)->image) }}"
                                                 alt="{{ App\Models\Catalog::find($key)->name }}"
                                                 class="img-fluid rounded" width="100" height="100">
                                         </td>

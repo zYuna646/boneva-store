@@ -195,22 +195,7 @@
         </div>
     </header>
 
-    @if (count($order) > 0)
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Order</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
+
 
     <section class="product-detail">
         <div class="container">
@@ -246,7 +231,9 @@
                                             <th>No</th>
                                             <th>Status</th>
                                             <th>alamat</th>
+                                            <th>Metode</th>
                                             <th>bukti</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -255,14 +242,88 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $result->status }}</td>
                                                 <td>{{ $result->alamat }}</td>
+                                                <td>{{ $result->method }}</td>
                                                 <td>
-                                                    <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
-                                                        alt="bukti" class="img-fluid rounded" width="100"
-                                                        height="100">
-                                                </td>
+                                                    @if ($result->bukti != '')
+                                                        <img style="height: 80px; width:100px"
+                                                            src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
+                                                            alt="{{ $result->name }}" class="img-fluid rounded"
+                                                            width="100" height="100">
+                                                    @else
+                                                        <div class="modal fade" id="staticBackdrop"
+                                                            data-bs-backdrop="static" data-bs-keyboard="false"
+                                                            tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5"
+                                                                            id="staticBackdropLabel">Order</h1>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{{ route('cart.cod', $result->id) }}"
+                                                                            method="post" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <div class="card-body">
 
+
+                                                                                <div class="row">
+                                                                                    <div class="col-12">
+                                                                                        <div class="mb-3">
+                                                                                            <label
+                                                                                                class="control-label mb-1">Bukti
+                                                                                                Pembayaran<span
+                                                                                                    class="text-danger">*</span></label>
+                                                                                            <input type="file"
+                                                                                                name="image"
+                                                                                                class="form-control @error('image') is-invalid @enderror" />
+                                                                                            @error('image')
+                                                                                                <small class="invalid-feedback">
+                                                                                                    {{ $message }}
+                                                                                                </small>
+                                                                                            @enderror
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            <div class="form-actions">
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-shop"
+                                                                                        data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-shop">Upload</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Regular Upload Bukti Button -->
+                                                        <button style="background: white; color: black; border-radius: 25px"
+                                                            type="button" class="btn btn-shop" data-bs-toggle="modal"
+                                                            data-bs-target="#staticBackdrop">
+                                                            Upload Bukti
+                                                        </button>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('cart.show', $result->id) }}"
+                                                        class="btn btn-sm btn-secondary">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

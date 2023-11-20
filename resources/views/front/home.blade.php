@@ -15,95 +15,61 @@
         }
 
         .toast-success {
-            background-color: #000 !important; /* Set your custom background color here */
+            background-color: #000 !important;
+            /* Set your custom background color here */
         }
     </style>
 @endpush
 
 @section('content')
-    <!-- Start Slider  -->
-    <section class="the-slider" data-aos="fade-up">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="owl-carousel owl-theme">
-                        @foreach ($reviewSliders as $reviewSlider)
-                            <div class="item">
-                                <img src="{{ asset('uploads/review-slider/' . $reviewSlider->image) }}" alt="">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Slider  -->
+  
+    <!-- ***** Header Area End ***** -->
 
-    <!-- Start Slider  -->
-    <section class="the-slider pt-0" data-aos="fade-up">
+    <!-- ***** Main Banner Area Start ***** -->
+    <section class="main-banner" id="top">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="owl-carousel owl-theme">
-                        @foreach ($reviewSliders as $reviewSlider)
-                            <div class="item">
-                                <img src="{{ asset('uploads/review-slider/' . $reviewSlider->image) }}" alt="">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Slider  -->
-
-    <!-- Start About us -->
-    <section class="about-us" id="about-us">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-lg-6" data-aos="fade-right">
-                    <div class="about-us-img">
-                        <img src="{{ asset('assets/front/img/about-us.jpg') }}" alt="about-us-img">
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6" data-aos="fade-left">
-                    <div class="card border-0 rounded-0">
-                        <div class="card-body">
-                            <h2 class="mb-3">About Us</h2>
-                            <img src="{{ asset('assets/front/img/logo.jpg') }}" alt="logo">
-                            <p class="my-3 text-justify" style="text-align: justify;">
-                                {{ Str::limit($aboutUs->desc ?? '', 850) }}</p>
-                            {{-- <a href="#">Read More <i class="fa-solid fa-arrow-right"></i></a> --}}
+            <div class="row">
+                <div class="col-lg-6 align-self-center">
+                    <div class="header-text">
+                        <h6>Welcome to Bonev</h6>
+                        <h2>Dukung Produk Air Kemasan <em>Lokal!</em></h2>
+                        <div class="main-button-gradient">
+                            <div class="scroll-to-section"><a href={{ route('register') }}>Join Us Now!</a></div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="right-image">
+                        <img src="assets/images/banner-right-image.png" alt="">
+                    </div>
+                </div>
             </div>
+        </div>
     </section>
-    <!-- End About us -->
-
-    <!-- Start Gallery -->
+    <!-- ***** Main Banner Area End ***** -->
     <section class="gallery" id="gallery">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="content-title" data-aos="fade-down">
                         <div class="text-center">
-                            <h2 class="mb-3">Catalog</h2>
-                            <p class="mb-5">Related about &nbsp;<img src="{{ asset('assets/front/img/logo.jpg') }}"
-                                    alt="logo" width="120px"></p>
+                            <div class="section-heading">
+                                <h6>Our Product</h6>
+                                <h4>Provided <em>Product</em></h4>
+                            </div>
                         </div>
                     </div>
                     <div class="content-body" data-aos="fade-up">
                         <div class="categories-links">
                             <span class="category-link category-active" data-name="All">All</span>
-                            @foreach ($categories as $category)
+                            @foreach (App\Models\Category::all() as $category)
                                 <span class="category-link" data-name="{{ $category->slug }}">{{ $category->name }}</span>
                             @endforeach
-                            <a href="#">See More ...</a>
+
                         </div>
 
                         <div class="galleries">
-                            @foreach ($galleries as $gallery)
+                            @foreach (App\Models\Catalog::all() as $gallery)
                                 <div class="gallery-img" data-name="{{ $gallery->category->slug ?? '' }}">
                                     <img src="{{ asset('uploads/catalog/image/' . $gallery->image ?? '') }}"
                                         alt="gallery-img">
@@ -126,136 +92,182 @@
             </div>
         </div>
     </section>
-    <!-- End Gallery -->
 
-    <!-- Start Videos -->
-    <section class="videos" id="videos">
+    <section class="simple-cta">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="content-title" data-aos="fade-down">
-                        <div class="text-center">
-                            <h2 class="mb-3">Videos</h2>
-                            <p class="mb-5">Latest video about &nbsp;<img src="{{ asset('assets/front/img/logo.jpg') }}"
-                                    alt="logo" width="120px"></p>
-                        </div>
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="left-image">
+                        <img src="{{ asset('landing/assets/images/cta-left-image.png') }}" alt="">
                     </div>
-                    <div class="content-body" data-aos="fade-up">
-                        <div class="row g-3 g-lg-4">
-                            @foreach ($videos as $video)
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="card border-0 rounded-0">
-                                        <div class="card-body p-0">
-                                            <iframe src="{{ $video->link_video ?? '' }}" frameborder="0"
-                                                class="yt-frame"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                </div>
+                <div class="col-lg-5 align-self-center">
+                    <h6>Get the sale right now!</h6>
+                    <h4>Up to 50% OFF For 1+ courses</h4>
+                    <p>Kogi VHS freegan bicycle rights try-hard green juice probably haven't heard of them cliche la
+                        croix af chillwave.</p>
+                    <div class="white-button">
+                        <a href="contact-us.html">View Courses</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h6>Testimonials</h6>
+                        <h4>What They <em>Think</em></h4>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="owl-testimonials owl-carousel" style="position: relative; z-index: 5;">
+                        <div class="item">
+                            <p>“just think about TemplateMo if you need free CSS templates for your website”</p>
+                            <h4>Catherine Walk</h4>
+                            <span>CEO &amp; Founder</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“think about our website first when you need free HTML templates for your website”</p>
+                            <h4>David Martin</h4>
+                            <span>CTO of Tech Company</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“just think about our website wherever you need free templates for your website”</p>
+                            <h4>Sophia Whity</h4>
+                            <span>CEO and Co-Founder</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
+                            <h4>Helen Shiny</h4>
+                            <span>Tech Officer</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
+                            <h4>George Soft</h4>
+                            <span>Gadget Reviewer</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
+                            <h4>Andrew Hall</h4>
+                            <span>Marketing Manager</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
+                            <h4>Maxi Power</h4>
+                            <span>Fashion Designer</span>
+                            <img src="assets/images/quote.png" alt="">
+                        </div>
+                        <div class="item">
+                            <p>“Praesent accumsan condimentum arcu, id porttitor est semper nec. Nunc diam lorem.”</p>
+                            <h4>Olivia Too</h4>
+                            <span>Creative Designer</span>
+                            <img src="assets/images/quote.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Videos -->
 
-    <!-- Start Information -->
-    <section class="information" id="information">
+    <section class="contact-us" id="contact-section">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="content-title" data-aos="fade-right">
-                        <div class="text-left">
-                            <h2 class="mb-3">Information</h2>
-                            <p class="mb-5">Latest information about &nbsp;<img
-                                    src="{{ asset('assets/front/img/logo.jpg') }}" alt="logo" width="120px"></p>
-                        </div>
-                    </div>
-                    <div class="content-body" data-aos="fade-right">
-                        <div class="owl-carousel owl-theme">
-                            @foreach ($informations as $info)
-                                <div class="item">
-                                    <img src="{{ $info->link_image }}" alt="">
-                                    <div class="info-overlay">
-                                        <div class="info-title">
-                                            <h4>
-                                                {{ $info->title ?? '' }}
-                                            </h4>
-                                            <span class="mb-3">Sumber : {{ $info->source ?? '-' }}</span>
-                                            <a href="{{ $info->link_information }}" target="_blank">Read More</a>
-                                        </div>
+                <div class="col-lg-8">
+                    <div id="map">
+
+                        <!-- You just need to go to Google Maps for your own map point, and copy the embed code from Share -> Embed a map section -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7151.84524236698!2d-122.19494600413192!3d47.56605883252286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490695e625f8965%3A0xf99b055e76477def!2sNewcastle%20Beach%20Park%20Playground%2C%20Bellevue%2C%20WA%2098006%2C%20USA!5e0!3m2!1sen!2sth!4v1644335269264!5m2!1sen!2sth"
+                            width="100%" height="420px" frameborder="0"
+                            style="border:0; border-radius: 15px; position: relative; z-index: 2;"
+                            allowfullscreen=""></iframe>
+                        <div class="row">
+                            <div class="col-lg-4 offset-lg-1">
+                                <div class="contact-info">
+                                    <div class="icon">
+                                        <i class="fa fa-phone"></i>
                                     </div>
+                                    <h4>Phone</h4>
+                                    <span>010-020-0340</span>
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-    <!-- End Information -->
-
-    <!-- Start Contact Us -->
-    <section class="contact-us" id="contact-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="content-title" data-aos="fade-down">
-                        <div class="text-center">
-                            <h2 class="mb-3">Contact Us</h2>
-                            <p class="mb-5"><img src="{{ asset('assets/front/img/logo.jpg') }}" alt="logo"
-                                    width="120px"></p>
-                        </div>
-                    </div>
-                    <div class="content-body" data-aos="fade-up">
-                        <div class="row justify-content-center align-items-center">
-                            <div class="col-12 col-lg-6">
-                                <iframe src="{{ $aboutUs->maps ?? '' }}" frameborder="0" class="maps-frame"></iframe>
                             </div>
-                            <div class="col-12 col-lg-6">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <div class="contact-us-card">
-                                            <div class="contact-us-circle">
-                                                <i class="fa-solid fa-phone"></i>
-                                            </div>
-                                            <div class="contact-us-text">
-                                                <h5>Phone</h5>
-                                                <span>{{ $aboutUs->phone ?? '' }}</span>
-                                            </div>
-                                        </div>
+                            <div class="col-lg-4">
+                                <div class="contact-info">
+                                    <div class="icon">
+                                        <i class="fa fa-phone"></i>
                                     </div>
-                                    <div class="col-12 col-lg-6">
-                                        <div class="contact-us-card">
-                                            <div class="contact-us-circle">
-                                                <i class="fa-solid fa-envelope"></i>
-                                            </div>
-                                            <div class="contact-us-text">
-                                                <h5>Email</h5>
-                                                <span>{{ $aboutUs->email ?? '' }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="contact-us-card">
-                                            <div class="contact-us-circle">
-                                                <i class="fa-solid fa-clock"></i>
-                                            </div>
-                                            <div class="contact-us-text">
-                                                <h5>Opening Hours</h5>
-                                                <span>Senin-Sabtu 13.00–19.00</span>
-                                                <span>Minggu 13.00–18.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <h4>Mobile</h4>
+                                    <span>090-080-0760</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    <form id="contact" action="" method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-heading">
+                                    <h6>Contact us</h6>
+                                    <h4>Say <em>Hello</em></h4>
+                                    <p>IF you need a working contact form by PHP script, please visit TemplateMo's
+                                        contact page for more info.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="name" name="name" id="name" placeholder="Full Name"
+                                        autocomplete="on" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*"
+                                        placeholder="Your Email" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="main-gradient-button">Send
+                                        Message</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-12">
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-12">
+                    <p class="copyright">Copyright © 2022 EduWell Co., Ltd. All Rights Reserved.
+
+                        <br>Design: <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
+                    </p>
+                </div>
             </div>
+        </div>
     </section>
-    <!-- End Contact Us -->
 @endsection
 
 
@@ -265,7 +277,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
             // Initialize Clipboard.js
             new ClipboardJS('.copy-link-button', {
                 text: function(trigger) {
@@ -280,7 +292,7 @@
 
             function showCopySuccessNotification() {
                 // Show a Toastr toast notification
-                toastr.success('Link Copied!', null, { 
+                toastr.success('Link Copied!', null, {
                     timeOut: 1500,
                     positionClass: 'toast-bottom-left',
                     progressBar: true,

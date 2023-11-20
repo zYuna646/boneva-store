@@ -100,8 +100,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link @if ($active == 'history') active @endif"
-                        href="{{ route('admin.history') }}" aria-expanded="false">
+                    <a class="sidebar-link @if ($active == 'information') active @endif"
+                        href="{{ route('admin.history_order') }}" aria-expanded="false">
                         <span>
                             <i class="ti ti-news"></i>
                         </span>

@@ -25,14 +25,14 @@
                 <div class="col-md-4 col-xl-3">
                     <div id="table_config_filter" class="position-relative">
                         <input type="search" id="search-box" class="form-control ps-5" aria-controls="table_config"
-                            placeholder="Search Product..." />
+                            placeholder="Search Account..." />
                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                     </div>
                 </div>
                 <div class="col-md-8 col-xl-9 text-end d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                    {{-- <a href="{{ route('admin.' . $active . '.create') }}" class="btn btn-info d-flex align-items-center">
-                        <i class="ti ti-plus text-white me-1 fs-5"></i> Add Product
-                    </a> --}}
+                    <a href={{route('admin.report_history')}} class="btn btn-info d-flex align-items-center">
+                        <i class="ti ti-plus text-white me-1 fs-5"></i> Buat Laporan
+                    </a>
                 </div>
             </div>
         </div>
@@ -55,9 +55,12 @@
         </div>
     @endif
 
+
+
     @if (count($datas) > 0)
         <div class="card">
             <div class="card-body">
+               
                 <div class="table-responsive">
                     <table id="table_config" class="table align-middle text-nowrap">
                         <thead class="header-item">
@@ -79,7 +82,7 @@
                                         <button type="submit" class="btn btn-sm btn-success"
                                             onclick="return confirm('Are you sure?')" disabled>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16" >
+                                                fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
                                                 <path
                                                     d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
                                             </svg>
@@ -87,9 +90,12 @@
                                     </td>
                                     <td>{{ $result->alamat }}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
-                                            alt="{{ $result->name }}" class="img-fluid rounded" width="100"
-                                            height="100">
+                                        @if ($result->method != 'cash')
+                                            <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
+                                                alt="{{ $result->name }}" class="img-fluid rounded" width="100"
+                                                height="100">
+                                        @endif
+
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.' . $active . '.show', $result->id) }}"

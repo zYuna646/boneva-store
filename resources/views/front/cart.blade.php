@@ -209,29 +209,52 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
-                                <h5 class="mb-3"><b>{{$payment->bank}}</b>: {{$payment->nomor_rekening}}</h5>
-                                <h6 class="mb-3"><b>{{$payment->pemilik_rekening}}</b></h6>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label class="control-label mb-1">Bukti Pembayaran<span
-                                                    class="text-danger">*</span></label>
-                                            <input type="file" name="image"
-                                                class="form-control @error('image') is-invalid @enderror" />
-                                            @error('image')
-                                                <small class="invalid-feedback">
-                                                    {{ $message }}
-                                                </small>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="control-label mb-1">Alamat</label>
-                                            <textarea name="alamat" class="form-control" rows="4">{{ old('description') }}</textarea>
-                                        </div>
+                                <label class="control-label mb-1">Pilih Metode <span class="text-danger">*</span></label>
+                                <select name="category_id"
+                                    class="form-control form-select @error('category_id') is-invalid @enderror">
+                                    <option value="" selected hidden>-- Select Metode --</option>
+                                    <option value="cash">
+                                        cash
+                                    </option>
+                                    <option value="bank">
+                                        bank
+                                    </option>
+                                    <option value="cod" selected>
+                                        cod
+                                    </option>
+                                </select>
+                                <div id="bank">
+                                    <h5 class="mb-3"><b>{{ $payment->bank }}</b>: {{ $payment->nomor_rekening }}</h5>
+                                    <h6 class="mb-3"><b>{{ $payment->pemilik_rekening }}</b></h6>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label class="control-label mb-1">Bukti Pembayaran<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" name="image"
+                                                    class="form-control @error('image') is-invalid @enderror" />
+                                                @error('image')
+                                                    <small class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </small>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="control-label mb-1">Alamat</label>
+                                                <textarea name="alamat_bank" class="form-control" rows="4">{{ old('description') }}</textarea>
+                                            </div>
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="cod">
+                                    <div class="mb-3">
+                                        <label class="control-label mb-1">Alamat</label>
+                                        <textarea name="alamat_cod" class="form-control" rows="4">{{ old('description') }}</textarea>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-actions">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-shop" data-bs-dismiss="modal">Close</button>
@@ -330,9 +353,10 @@
                                                 </td>
                                                 <td>{{ App\Models\Catalog::find($key)->price * $result }}</td>
                                                 <td>
-                                                    <img src="{{ asset('uploads/catalog/image/' . App\Models\Catalog::find($key)->image) }}"
+                                                    <img style="width: 100px; height:100px"
+                                                        src="{{ asset('uploads/catalog/image/' . App\Models\Catalog::find($key)->image) }}"
                                                         alt="{{ App\Models\Catalog::find($key)->name }}"
-                                                        class="img-fluid rounded" width="100" height="100">
+                                                        class="img-fluid rounded" width="50" height="50">
                                                 </td>
 
                                             </tr>
@@ -408,5 +432,27 @@
                 });
             }
         })
+
+        $(document).ready(function() {
+            // Initially hide the bank and cod sections
+            $('#bank').hide();
+            $('.cod').hide();
+
+            // Listen for changes in the select element
+            $('select[name="category_id"]').change(function() {
+                // Get the selected value
+                var selectedValue = $(this).val();
+
+                $('#bank').hide();
+                $('#cod').hide();
+
+                // Show the selected section
+                if (selectedValue === 'bank') {
+                    $('#bank').show();
+                } else if (selectedValue === 'cod') {
+                    $('#cod').show();
+                }
+            });
+        });
     </script>
 @endpush

@@ -66,6 +66,7 @@
                                 <th>Name</th>
                                 <th>Verified</th>
                                 <th>Alamat</th>
+                                <th>Metode</th>
                                 <th>Bukti</th>
                                 <th>Action</th>
                             </tr>
@@ -80,8 +81,7 @@
                                             class="d-inline">
                                             @csrf
                                             @method('put')
-                                            <button type="submit"
-                                                class="btn btn-sm btn-danger"
+                                            <button type="submit" class="btn btn-sm btn-danger"
                                                 onclick="return confirm('Are you sure?')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
@@ -92,18 +92,23 @@
                                         </form>
                                     </td>
                                     <td>{{ $result->alamat }}</td>
+                                    <td>{{$result->method}}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
-                                            alt="{{ $result->name }}" class="img-fluid rounded" width="100"
-                                            height="100">
+                                        @if ($result->bukti != '')
+                                            <img src="{{ asset('uploads/catalog/image/' . $result->bukti) }}"
+                                                alt="{{ $result->name }}" class="img-fluid rounded" width="100"
+                                                height="100">
+                                        @else
+                                            Belum Di Upload
+                                        @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.' . $active . '.show', $result->id) }}"
+                                        <a href="{{ route('admin.' . $route . '.show', $result->id) }}"
                                             class="btn btn-sm btn-secondary">
                                             <i class="ti ti-eye"></i>
                                         </a>
 
-                                        <form action="{{ route('admin.' . $active . '.delete', $result->id) }}"
+                                        <form action="{{ route('admin.' . $route . '.delete', $result->id) }}"
                                             method="post" class="d-inline">
                                             @csrf
                                             @method('delete')

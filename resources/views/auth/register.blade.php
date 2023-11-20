@@ -37,7 +37,7 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="{{ url('/') }}" class="text-nowrap logo-img text-center d-block mb-5 w-100">
-                                    <img src="{{ asset('assets/front/img/logo.jpg') }}" width="180" alt="">
+                                    <img src="{{ asset('assets/front/img/logo.png') }}" width="100" alt="">
                                 </a>
                                 <div class="position-relative text-center my-4">
                                     <p class="mb-0 fs-4 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">
@@ -176,6 +176,13 @@
                                                 <div class="text-danger small">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="position-relative text-center my-4">
+                                        <p
+                                            class="mb-0 fs-4 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">
+                                            Sudah Memiliki Akun? <a href="register">Log In</a></p>
+                                        <span
+                                            class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                                     </div>
 
                                     <button type="submit" class="btn btn-dark w-100 py-8 rounded-2" disabled

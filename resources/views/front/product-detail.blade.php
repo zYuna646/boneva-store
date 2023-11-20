@@ -220,6 +220,7 @@
                                     <i class="fa-solid fa-tag"></i>
                                     {{ $product->category->name ?? '' }}
                                 </span>
+                                
                             </div>
 
                             <h3 class="fw-semibold">{{ $product->name ?? '' }}</h3>
@@ -262,49 +263,7 @@
         </div>
     </section>
 
-    <section class="related-product" data-aos="fade-down">
-        <div class="container">
-            <div class="content-title mb-5">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="text-left">
-                        <h2 class="mb-3">Related Products</h2>
-                        <p class="mb-0">Related Products &nbsp;<img src="{{ asset('assets/front/img/logo.jpg') }}"
-                                alt="logo" width="120px"></p>
-                    </div>
-                    <a href="{{ url('/catalog') }}" class="btn-see-more">See More...</a>
-                </div>
-            </div>
-            <div class="row g-3 g-xl-4">
-                @if (count($related_products) > 0)
-                    @foreach ($related_products as $related_product)
-                        <div class="col-6 col-md-4 col-xl-3">
-                            <a href="{{ route('product.detail', $related_product->slug) }}" class="brand-card">
-                                <div class="brand-img">
-                                    <img src="{{ asset('uploads/catalog/image/' . $related_product->image ?? '') }}" alt="image">
-                                    <div class="brand-overlay">
-                                        <span class="brand-category">
-                                            <i class="fa-solid fa-tag"></i>
-                                            {{ $related_product->category->name ?? '' }}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="brand-title">
-                                    <h6>{{ $related_product->name }}</h6>
-                                    <p>{{ 'Rp ' . number_format($related_product->price, 0, ',', '.') }}</p>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                @else
-                    <div class="col-12">
-                        <div class="alert alert-dark text-center small border-0 rounded-0">
-                            Related products were not found.
-                        </div>
-                    </div>
-                @endif
-            </div>
-        </div>
-    </section>
+
 @endsection
 
 @push('scripts')
