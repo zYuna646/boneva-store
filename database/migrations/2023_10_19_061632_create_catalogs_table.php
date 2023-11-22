@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('price')->nullable();
             $table->integer('stock')->nullable();
             $table->string('fabric')->nullable();
+            $table->json('bahan')->nullable();
+            $table->integer('minimum')->nullable();
             $table->timestamps();
         });
     }

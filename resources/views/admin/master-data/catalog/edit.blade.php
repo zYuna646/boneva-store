@@ -200,6 +200,17 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label class="control-label mb-1">Minimum Pembelian</label>
+                            <input type="number" name="minimum" class="form-control" value="{{ old('minimum', $data->minimum) }}" />
+                        </div>
+                        @foreach ($bahan as $item)
+                            <div class="mb-3">
+                                <label class="control-label mb-1">{{ $item->name }}</label>
+                                <input type="number" name="{{ $item->slug }}" class="form-control"
+                                    value="{{ old($item->name, $baku[$item->id]) ?? 0 }}" />
+                            </div>
+                        @endforeach
+                        <div class="mb-3">
                             <label class="control-label mb-1">Stock</label>
                             <input type="number" name="stock" class="form-control"
                                 value="{{ old('stock', $data->stock) }}" />

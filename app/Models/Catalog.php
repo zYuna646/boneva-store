@@ -17,6 +17,8 @@ class Catalog extends Model
         'image',
         'price',
         'stock',
+        'bahan',
+        'minimum',
         'fabric',
     ];
 

@@ -28,7 +28,7 @@ class OrderController extends Controller
                 'user_id' => auth()->user()->id,
                 'status' => 'cart',
                 'items' => json_encode([
-                    $product->id => 1
+                    $product->id => $product->minimum,
                 ])
             ]);
         } else {
@@ -45,7 +45,6 @@ class OrderController extends Controller
         }
         return redirect('cart');
     }
-
 
 
     public function cart()
@@ -195,9 +194,14 @@ class OrderController extends Controller
         $json = json_decode($cartOrder->items, true);
         if (empty($json)) {
             $cartOrder->delete();
-        } else {
+        } 
+        else {
             $json[$id] = $json[$id] - 1;
-            if ($json[$id] <= 0) {
+            if($json[$id] < Catalog::find($id)->minimum)
+            {
+                unset($json[$id]);
+            }
+            else if ($json[$id] <= 0) {
                 unset($json[$id]);
             }
             $cartOrder->update([
@@ -379,7 +383,7 @@ class OrderController extends Controller
         ];
 
         $pdf = PDF::loadView('admin.master-data.order.report')->setPaper('a4', 'portrait');
-        return $pdf->download('contoh.pdf');
+        return $pdf->download('history_order.pdf');
 
     }
 

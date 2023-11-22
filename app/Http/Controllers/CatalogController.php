@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bahan;
 use App\Models\Catalog;
 use App\Models\CatalogImage;
 use App\Models\Category;
@@ -32,6 +33,7 @@ class CatalogController extends Controller
             'title' => 'Catalog',
             'subtitle' => 'Add Product',
             'active' => 'catalog',
+            'bahan' => Bahan::all(),
             'categories' => Category::orderBy('name', 'ASC')->get(),
         ]);
     }
@@ -77,6 +79,16 @@ class CatalogController extends Controller
             $stock = 0;
         }
 
+        $bahan = Bahan::all();
+        $json = [];
+        $json = json_encode($json);
+        $json = json_decode($json, true);
+
+        foreach ($bahan as $item) {
+            $json[$item->id] = $request[$item->slug];
+        }
+        $json = json_encode($json);
+
         $slug = Str::slug($request->input('name'));
 
         $image = $request->file('image');
@@ -91,6 +103,8 @@ class CatalogController extends Controller
             'image' => $image_name,
             'price' => $price,
             'stock' => $stock,
+            'bahan' => $json,
+            'minimum' => $request->minimum,
             'fabric' => $request->input('fabric'),
         ]);
 
@@ -131,6 +145,7 @@ class CatalogController extends Controller
     {
         $data = Catalog::findOrFail($id);
         $price = number_format($data->price, 0, ',', ',');
+        $bahan = json_decode($data->bahan, true);
 
         return view('admin.master-data.catalog.edit', [
             'title' => 'Catalog',
@@ -138,6 +153,8 @@ class CatalogController extends Controller
             'active' => 'catalog',
             'data' => $data,
             'price' => $price,
+            'bahan' => Bahan::all(),
+            'baku' => $bahan,
             'categories' => Category::orderBy('name', 'ASC')->get(),
         ]);
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\accountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BahanController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontPageController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\MainSliderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymenController;
+use App\Http\Controllers\ProduksController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\ReviewSliderController;
 use App\Http\Controllers\VideoController;
@@ -69,6 +71,22 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::get('/admin/category/{id}/edit', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::put('/admin/category/{id}/update', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::delete('/admin/category/{id}/delete', [CategoryController::class, 'destroy'])->name('admin.category.delete');
+
+    Route::get('/admin/produksi', [ProduksController::class, 'index'])->name('admin.produksi');
+    Route::get('/admin/produksi/add', [ProduksController::class, 'create'])->name('admin.produksi.create');
+    Route::post('/admin/produksi/store', [ProduksController::class, 'store'])->name('admin.produksi.store');
+    Route::get('/admin/produksi/{id}/edit', [ProduksController::class, 'edit'])->name('admin.produksi.edit');
+    Route::put('/admin/produksi/{id}/update', [ProduksController::class, 'update'])->name('admin.produksi.update');
+    Route::delete('/admin/produksi/{id}/delete', [ProduksController::class, 'destroy'])->name('admin.produksi.delete');
+    Route::post('/admin/produksi/report', [ProduksController::class, 'report'])->name('admin.produksi.report');
+
+    Route::get('/admin/bahan', [BahanController::class, 'index'])->name('admin.bahan');
+    Route::get('/admin/bahan/add', [BahanController::class, 'create'])->name('admin.bahan.create');
+    Route::post('/admin/bahan/store', [BahanController::class, 'store'])->name('admin.bahan.store');
+    Route::get('/admin/bahan/{id}/edit', [BahanController::class, 'edit'])->name('admin.bahan.edit');
+    Route::put('/admin/bahan/{id}/update', [BahanController::class, 'update'])->name('admin.bahan.update');
+    Route::delete('/admin/bahan/{id}/delete', [BahanController::class, 'destroy'])->name('admin.bahan.delete');
+    Route::get('/admin/bahan/report', [BahanController::class, 'report'])->name('admin.bahan.report');
 
     Route::get('/admin/account', [accountController::class, 'index'])->name('admin.account');
     Route::get('/admin/account/add', [accountController::class, 'create'])->name('admin.account.create');

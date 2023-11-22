@@ -67,6 +67,7 @@
                             <th>Price</th>
                             <th>Stock</th>
                             <th>Unit</th>
+                            <th>Minimum Pembelian</th>
                             <th>Image</th>
                             <th>Action</th>
                         </tr>
@@ -80,6 +81,7 @@
                                 <td>{{ $result->price }}</td>
                                 <td>{{ $result->stock }}</td>
                                 <td>{{ $result->fabric }}</td>
+                                <td>{{ $result->minimum}}</td>
                                 <td>
                                     <img src="{{ asset('uploads/catalog/image/' . $result->image) }}" alt="{{ $result->name }}"
                                         class="img-fluid rounded" width="100" height="100">

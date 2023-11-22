@@ -27,9 +27,8 @@
                     <div class="col-12">
                         <div class="mb-3">
                             <label class="control-label mb-1">Product Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name"
-                                class="form-control @error('name') is-invalid @enderror" placeholder="..."
-                                value="{{ old('name') }}" />
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                                placeholder="..." value="{{ old('name') }}" />
                             @error('name')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -55,7 +54,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Image <span class="text-danger">*</span></label>
-                            <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" />
+                            <input type="file" name="image"
+                                class="form-control @error('image') is-invalid @enderror" />
                             @error('image')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -64,7 +64,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Other Images</label>
-                            <input type="file" name="other_images[]" class="form-control @error('other_images') is-invalid @enderror" multiple />
+                            <input type="file" name="other_images[]"
+                                class="form-control @error('other_images') is-invalid @enderror" multiple />
                             @error('other_images')
                                 <small class="invalid-feedback">
                                     {{ $message }}
@@ -79,13 +80,25 @@
                             <label class="control-label mb-1">Price</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">Rp</span>
-                                <input type="text" id="priceInput" name="price" class="form-control" value="{{ old('price') }}" placeholder="0" />
+                                <input type="text" id="priceInput" name="price" class="form-control"
+                                    value="{{ old('price') }}" placeholder="0" />
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="control-label mb-1">Stock</label>
                             <input type="number" name="stock" class="form-control" value="{{ old('stock') }}" />
                         </div>
+                        <div class="mb-3">
+                            <label class="control-label mb-1">Minimum Pembelian</label>
+                            <input type="number" name="minimum" class="form-control" value="{{ old('minimum') }}" />
+                        </div>
+                        @foreach ($bahan as $item)
+                            <div class="mb-3">
+                                <label class="control-label mb-1">{{ $item->name }}</label>
+                                <input type="number" name="{{ $item->slug }}" class="form-control"
+                                    value="{{ old($item->name) ?? 0 }}" />
+                            </div>
+                        @endforeach
                         <div>
                             <label class="control-label mb-1">Unit</label>
                             <input type="text" name="fabric" class="form-control" value="{{ old('fabric') }}" />

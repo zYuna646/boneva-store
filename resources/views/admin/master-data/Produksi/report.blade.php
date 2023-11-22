@@ -67,51 +67,35 @@
             </tr>
         </table>
         <div class="header">
-            <h2>Laporan Penjualan Boneva</h2>
+            <h2>Laporan Produksi Boneva</h2>
             <h3>KABUPATEN BONE BOLANGO</h3>
         </div>
         <table border="1">
             <thead>
                 <tr>
                     <th>NO.</th>
-                    <th>NAMA Barang</th>
-                    <th>Tipe Barang</th>
-                    <th>Harga</th>
-                    <th>Jumlah Terjual</th>
+                    <th>TANGGAL PRODUKSI</th>
+                    <th>NAMA PRODUCT</th>
+                    <th>SATUAN</th>
+                    <th>JUMLAH PRODUKSI</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    $orders = App\Models\Order::where('status', 'success')->get();
-                    $catalogs = App\Models\Catalog::all();
-
-                    $jumlah = [];
-
-                    foreach ($catalogs as $item) {
-                        $jumlah[$item->id] = 0;
-                        foreach ($orders as $result) {
-                            $json = json_decode($result->items, true);
-                            try {
-                                $jumlah[$item->id] += $json[$item->id];
-                            } catch (\Throwable $th) {
-                                // Handle exception if needed
-                            }
-                        }
-                    }
-
+                    $catalogs = App\Models\Bahan::all();
                     $i = 0;
                 @endphp
 
-                @foreach ($catalogs as $item)
+                @foreach ($produksi as $item)
                     @php
                         $i++;
                     @endphp
                     <tr>
                         <td>{{ $i }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->category->name }}</td>
-                        <td>{{ $item->price }}</td>
-                        <td>{{ $jumlah[$item->id] }}</td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->catalog->name }}</td>
+                        <td>{{ $item->catalog->fabric }}</td>
+                        <td>{{ $item->jumlah_produksi }}</td>
                     </tr>
                 @endforeach
             </tbody>
