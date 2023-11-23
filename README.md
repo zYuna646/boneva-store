@@ -29,6 +29,8 @@ To finalize this everything, run the following commands on your terminal.
 
   php artisan migrate
 
+  php artisan db:seed
+
   php artisan server
 ```
 
