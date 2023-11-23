@@ -54,11 +54,13 @@ class ProduksController extends Controller
         $catalog = Catalog::findOrFail($request->catalog_id);
 
         $json = json_decode($catalog->bahan, true);
-        foreach ($json as $key => $value) {
-            $bahan = Bahan::findOrFail($key);
-            $bahan->update([
-                'jumlah' => $bahan->jumlah - $value,
-            ]);
+        for ($i = 0; $i < $request->jumlah; $i++) {
+            foreach ($json as $key => $value) {
+                $bahan = Bahan::findOrFail($key);
+                $bahan->update([
+                    'jumlah' => $bahan->jumlah - $value,
+                ]);
+            }
         }
 
         Produks::create([
