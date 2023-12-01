@@ -12,6 +12,7 @@ use App\Http\Controllers\MainSliderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymenController;
 use App\Http\Controllers\ProduksController;
+use App\Http\Controllers\ProduksiBahanBakuController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\ReviewSliderController;
 use App\Http\Controllers\VideoController;
@@ -79,6 +80,14 @@ Route::middleware(['auth', 'login-check'])->group(function () {
     Route::put('/admin/produksi/{id}/update', [ProduksController::class, 'update'])->name('admin.produksi.update');
     Route::delete('/admin/produksi/{id}/delete', [ProduksController::class, 'destroy'])->name('admin.produksi.delete');
     Route::post('/admin/produksi/report', [ProduksController::class, 'report'])->name('admin.produksi.report');
+
+    Route::get('/admin/produksi_bahan', [ProduksiBahanBakuController::class, 'index'])->name('admin.produksi_bahan');
+    Route::get('/admin/produksi_bahan/add', [ProduksiBahanBakuController::class, 'create'])->name('admin.produksi_bahan.create');
+    Route::post('/admin/produksi_bahan/store', [ProduksiBahanBakuController::class, 'store'])->name('admin.produksi_bahan.store');
+    Route::get('/admin/produksi_bahan/{id}/edit', [ProduksiBahanBakuController::class, 'edit'])->name('admin.produksi_bahan.edit');
+    Route::put('/admin/produksi_bahan/{id}/update', [ProduksiBahanBakuController::class, 'update'])->name('admin.produksi_bahan.update');
+    Route::delete('/admin/produksi_bahan/{id}/delete', [ProduksiBahanBakuController::class, 'destroy'])->name('admin.produksi_bahan.delete');
+    Route::post('/admin/produksi_bahan/report', [ProduksiBahanBakuController::class, 'report'])->name('admin.produksi_bahan.report');
 
     Route::get('/admin/bahan', [BahanController::class, 'index'])->name('admin.bahan');
     Route::get('/admin/bahan/add', [BahanController::class, 'create'])->name('admin.bahan.create');

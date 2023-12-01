@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\BahanChart;
+use App\Charts\JumlahOrderChart;
+use App\Charts\OrderChart;
+use App\Charts\ProductChart;
+use App\Charts\ProduksiBahanChart;
+use App\Charts\ProduksiProdukChart;
 use App\Models\Catalog;
 use App\Models\Category;
 use App\Models\Information;
@@ -12,7 +18,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function index(BahanChart $bahanChart, ProductChart $productChart, ProduksiProdukChart $produksiProdukChart, ProduksiBahanChart $produksiBahanChart, OrderChart $orderChart, JumlahOrderChart $jumlahOrderChart)
     {
         $count_catalog = Catalog::count();
         $count_category = Category::count();
@@ -34,6 +40,12 @@ class AdminController extends Controller
             'latest_products' => $latest_products,
             'latest_video' => $latest_video,
             'latest_informations' => $latest_informations,
+            'bahanChart' => $bahanChart->build(),
+            'productChart' => $productChart->build(),
+            'ProduksiProduct' => $produksiProdukChart->build(),
+            'produksiBahan' => $produksiBahanChart->build(),
+            'orderChart' => $orderChart->build(),
+            'jumlahOrder' => $jumlahOrderChart->build()
         ]);
     }
 
