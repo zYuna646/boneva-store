@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\ProduksiProdukChart;
 use App\Models\Bahan;
 use App\Models\Catalog;
 use App\Models\Produks;
@@ -71,7 +72,7 @@ class ProduksController extends Controller
         return redirect()->route('admin.produksi')->with('success', 'Bahan Baku has been added!');
     }
 
-    public function report(Request $request)
+    public function report(Request $request, ProduksiProdukChart $produksiProdukChart)
     {
         $this->validate(
             $request,
@@ -92,6 +93,7 @@ class ProduksController extends Controller
         }
         $data = [
             'produksi' => $produksi,
+            'produksiProdukChart' => $produksiProdukChart->build(),
         ];
         $pdf = PDF::loadView('admin.master-data.Produksi.report', $data)->setPaper('a4', 'portrait');
         return $pdf->download('Produksi Boneva.pdf');

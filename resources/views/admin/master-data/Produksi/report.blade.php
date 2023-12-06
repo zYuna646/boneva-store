@@ -53,9 +53,9 @@
 
 <body>
     <div class="rangkasurat">
-        <table style="border: none">
+        <table style="border: none; width: 100%;">
             <tr>
-                <td><img src="{{ public_path('assets/front/img/favicon.png') }}" width="100px" alt="Logo">
+                <td><img src="{{ public_path('assets/front/img/favicon.png') }}" width="100px" alt="Logo"></td>
                 <td class="tengah">
                     <h2>PEMERINTAH DAERAH PROVINSI JAWA BARAT</h2>
                     <h2>DINAS PENDIDIKAN</h2>
@@ -70,7 +70,7 @@
             <h2>Laporan Produksi Boneva</h2>
             <h3>KABUPATEN BONE BOLANGO</h3>
         </div>
-        <table border="1">
+        <table border="1" style="width: 100%;">
             <thead>
                 <tr>
                     <th>NO.</th>
@@ -101,7 +101,14 @@
             </tbody>
         </table>
     </div>
-    <div></div>
+    
+    <div>
+        {!! $produksiProdukChart->container() !!}
+    </div>
+
+    <script src="{{ $produksiProdukChart->cdn() }}">
+    </script>
+    {{ $produksiProdukChart->script() }}
 </body>
 
 </html>

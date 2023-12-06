@@ -165,6 +165,24 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $lineProduksi->container() !!}
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $lineBahan->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
     
 @endsection
 
@@ -206,6 +224,9 @@
     <script src="{{ $produksiBahan->cdn() }}"></script>
     <script src="{{ $orderChart->cdn() }}"></script>
     <script src="{{ $jumlahOrder->cdn() }}"></script>
+    <script src="{{ $lineProduksi->cdn() }}"></script>
+    <script src="{{ $lineBahan->cdn() }}"></script>
+
 
 
     {{ $bahanChart->script() }}
@@ -214,5 +235,8 @@
     {{ $produksiBahan->script() }}
     {{ $orderChart->script() }}
     {{ $jumlahOrder->script() }}
+    {{ $lineProduksi->script() }}
+    {{ $lineBahan->script() }}
+
 
 @endpush
