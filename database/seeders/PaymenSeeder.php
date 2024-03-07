@@ -16,7 +16,7 @@ class PaymenSeeder extends Seeder
         Paymen::create([
             'bank' => 'bni',
             'nomor_rekening' => '120121012',
-            'pemilik_rekening' => 'john doe',
+            'pemilik_rekening' => 'john doe 12345',
         ]);
     }
 }
