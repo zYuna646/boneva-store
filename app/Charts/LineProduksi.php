@@ -2,6 +2,7 @@
 
 namespace App\Charts;
 
+use App\Models\Catalog;
 use App\Models\Produks;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
@@ -19,20 +20,30 @@ class LineProduksi
         // Fetch production data from the database
         $produksData = Produks::all();
 
-        // Extract dates and corresponding production quantities
-        $dates = $produksData->pluck('created_at')->map(function ($date) {
-            return $date->format('Y-m-d'); // Format the date as needed
-        });
+        // Group production data by catalog ID
+        $groupedData = $produksData->groupBy('catalog_id');
 
-        $quantities = $produksData->pluck('jumlah_produksi');
-
-        // Display data for debugging
-
-        // Build the chart
-        return $this->chart->lineChart()
+        $chart = $this->chart->lineChart()
             ->setTitle('Produksi Produk')
-            ->setSubtitle('Quantity of production over time based on created date.')
-            ->addData('Jumlah Produksi Produk', $quantities->toArray())
-            ->setXAxis($dates->toArray());
+            ->setSubtitle('Quantity of production over time based on created date.');
+
+        // Add data for each catalog ID
+        foreach ($groupedData as $catalogId => $data) {
+            $catalog = Catalog::find($catalogId); // Retrieve catalog information
+            if ($catalog) {
+                $catalogName = $catalog->name; // Get catalog name
+                $quantities = $data->pluck('jumlah_produksi');
+                $chart->addData($catalogName, $quantities->toArray());
+            }
+        }
+
+        // Set X axis based on unique dates
+        $uniqueDates = $produksData->pluck('created_at')->map(function ($date) {
+            // Check if date is not null and format as 'Y-m-d H:i:s'
+            return optional($date)->format('Y-m-d H:i:s');
+        })->unique()->toArray();
+        $chart->setXAxis($uniqueDates);
+
+        return $chart;
     }
 }
