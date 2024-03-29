@@ -53,9 +53,9 @@
 
 <body>
     <div class="rangkasurat">
-        <table style="border: none; width: 100%;">
+        <table style="border: none">
             <tr>
-                <td><img src="{{ public_path('assets/front/img/favicon.png') }}" width="100px" alt="Logo"></td>
+                <td><img src="{{ public_path('assets/front/img/favicon.png') }}" width="100px" alt="Logo">
                 <td class="tengah">
                     <h2>PEMERINTAH DAERAH PROVINSI JAWA BARAT</h2>
                     <h2>DINAS PENDIDIKAN</h2>
@@ -67,15 +67,15 @@
             </tr>
         </table>
         <div class="header">
-            <h2>Laporan Produksi Boneva</h2>
+            <h2>Laporan Produksi Bahan Baku Boneva</h2>
             <h3>KABUPATEN BONE BOLANGO</h3>
         </div>
-        <table border="1" style="width: 100%;">
+        <table border="1">
             <thead>
                 <tr>
                     <th>NO.</th>
                     <th>TANGGAL PRODUKSI</th>
-                    <th>NAMA PRODUCT</th>
+                    <th>NAMA BAHAN BAKU</th>
                     <th>SATUAN</th>
                     <th>JUMLAH PRODUKSI</th>
                 </tr>
@@ -93,22 +93,15 @@
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->catalog->name }}</td>
-                        <td>{{ $item->catalog->fabric }}</td>
+                        <td>{{ $item->bahan->name }}</td>
+                        <td>{{ $item->bahan->satuan }}</td>
                         <td>{{ $item->jumlah_produksi }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    
-    <div>
-        {!! $produksiProdukChart->container() !!}
-    </div>
-
-    <script src="{{ $produksiProdukChart->cdn() }}">
-    </script>
-    {{ $produksiProdukChart->script() }}
+    <div></div>
 </body>
 
 </html>

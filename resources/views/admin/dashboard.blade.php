@@ -111,117 +111,79 @@
         </div> --}}
     </div>
 
+
     <div class="row">
-        <div class="col-12 col-lg-5 d-flex align-items-stretch">
-            <div class="card w-100">
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
                 <div class="card-body">
-                    <div class="position-relative">
-                        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                            <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold">Latest Products</h5>
-                                <p class="card-subtitle mb-0">Five latest products</p>
-                            </div>
-                            <div>
-                                <a href="{{ route('admin.catalog') }}" class="btn btn-sm btn-light-primary">See More</a>
-                            </div>
-                        </div>
-                        <div>
-                            @if (count($latest_products) > 0)
-                                @foreach ($latest_products as $latest_product)
-                                    <div class="d-flex align-items-center pb-2">
-                                        <div class="me-3 pe-1">
-                                            <img src="{{ asset('uploads/catalog/image/' . $latest_product->image) }}"
-                                                class="shadow-warning rounded-2" alt="" width="72"
-                                                height="72" style="object-fit: cover;" />
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between w-100">
-                                            <div>
-                                                <h5 class="fw-semibold fs-4 mb-2"> {{ $latest_product->name }} </h5>
-                                                <span
-                                                    class="mb-0 fs-1 badge bg-success">{{ $latest_product->category->name }}</span>
-                                            </div>
-                                            <div>
-                                                <h6 class="mb-0 text-nowrap">
-                                                    {{ 'Rp ' . number_format($latest_product->price, 0, ',', '.') }}
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="alert alert-warning mb-0" role="alert">
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <span
-                                            class="rounded-circle px-1 py-0 border border-2 border-warning text-light bg-warning mb-0 d-block"
-                                            style="font-size: 16px;">
-                                            <i class="ti ti-alert-circle"></i>
-                                        </span>
-                                        <p class="mb-0">
-                                            No product data yet. <a href="{{ route('admin.catalog.create') }}">Add</a> now.
-                                        </p>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
+                    {!! $bahanChart->container() !!}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-7">
+    
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
             <div class="card">
                 <div class="card-body">
-                    <div class="position-relative">
-                        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
-                            <div class="mb-3 mb-sm-0">
-                                <h5 class="card-title fw-semibold mb-0">Latest Video</h5>
-                            </div>
-                            <div>
-                                <a href="{{ route('admin.video') }}" class="btn btn-sm btn-light-primary">See More</a>
-                            </div>
-                        </div>
-                        <div>
-                            @if ($latest_video != null)
-                                <iframe src="{{ $latest_video->link_video ?? '' }}" frameborder="0" width="100%"
-                                    height="350px"></iframe>
-                            @else
-                                <div class="alert alert-warning mb-0" role="alert">
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <span
-                                            class="rounded-circle px-1 py-0 border border-2 border-warning text-light bg-warning mb-0 d-block"
-                                            style="font-size: 16px;">
-                                            <i class="ti ti-alert-circle"></i>
-                                        </span>
-                                        <p class="mb-0">
-                                            No video data yet. <a href="{{ route('admin.video.create') }}">Add</a> now.
-                                        </p>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-                    </div>
+                    {!! $productChart->container() !!}
                 </div>
             </div>
         </div>
     </div>
 
-    @if (count($latest_informations) > 0)
-        <div class="row">
-            @foreach ($latest_informations as $latest_information)
-                <div class="col-12 col-lg-4 d-flex align-items-stretch">
-                    <div class="card">
-                        <img class="card-img-top img-responsive" src="{{ $latest_information->link_image ?? '' }}" alt="Card image cap" style="height: 250px;object-fit: cover;" />
-                        <div class="card-body">
-                            <h4 class="card-title">{{ $latest_information->title ?? '' }}</h4>
-                            <p class="card-text">
-                                Sumber : {{ $latest_information->source ?? '' }}
-                            </p>
-                            <a href="{{ $latest_information->link_information ?? '' }}" class="btn btn-primary" target="_blank">Read More</a>
-                        </div>
-                    </div>
+    {{-- <div class="row">
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $ProduksiProduct->container() !!}
                 </div>
-            @endforeach
+            </div>
         </div>
-    @endif
+    
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $produksiBahan->container() !!}
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    <div class="row">
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $orderChart->container() !!}
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $jumlahOrder->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $lineProduksi->container() !!}
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-12 col-lg-6 d-flex align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    {!! $lineBahan->container() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    
 @endsection
 
 @push('scripts')
@@ -256,4 +218,25 @@
             });
         });
     </script>
+    <script src="{{ $bahanChart->cdn() }}"></script>
+    <script src="{{ $productChart->cdn() }}"></script>
+    <script src="{{ $ProduksiProduct->cdn() }}"></script>
+    <script src="{{ $produksiBahan->cdn() }}"></script>
+    <script src="{{ $orderChart->cdn() }}"></script>
+    <script src="{{ $jumlahOrder->cdn() }}"></script>
+    <script src="{{ $lineProduksi->cdn() }}"></script>
+    <script src="{{ $lineBahan->cdn() }}"></script>
+
+
+
+    {{ $bahanChart->script() }}
+    {{ $productChart->script() }}
+    {{ $ProduksiProduct->script() }}
+    {{ $produksiBahan->script() }}
+    {{ $orderChart->script() }}
+    {{ $jumlahOrder->script() }}
+    {{ $lineProduksi->script() }}
+    {{ $lineBahan->script() }}
+
+
 @endpush

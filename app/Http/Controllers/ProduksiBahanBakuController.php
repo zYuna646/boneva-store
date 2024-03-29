@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\ProduksiProdukChart;
 use App\Models\Bahan;
 use App\Models\Catalog;
 use App\Models\Produks;
+use App\Models\Produksi_Bahan_Baku;
 use Illuminate\Http\Request;
 use PDF;
 
-class ProduksController extends Controller
+
+class ProduksiBahanBakuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.master-data.Produksi.index', [
-            'title' => 'Produksi Products',
+        return view('admin.master-data.Produksi_Bahan.index', [
+            'title' => 'Produksi Bahan Baku',
             'subtitle' => '',
-            'active' => 'produksi',
-            'datas' => Produks::latest()->get(),
+            'active' => 'produksi_bahan',
+            'datas' => Produksi_Bahan_Baku::latest()->get(),
         ]);
     }
 
@@ -29,11 +30,11 @@ class ProduksController extends Controller
      */
     public function create()
     {
-        return view('admin.master-data.Produksi.create', [
-            'title' => 'Produksi Products',
-            'subtitle' => 'Add Produksi',
-            'active' => 'produksi',
-            'catalog' => Catalog::all(),
+        return view('admin.master-data.Produksi_Bahan.create', [
+            'title' => 'Produksi Bahan Baku',
+            'subtitle' => 'Add Produksi Bahan Baku',
+            'active' => 'produksi_bahan',
+            'catalog' => Bahan::all(),
         ]);
     }
 
@@ -52,27 +53,20 @@ class ProduksController extends Controller
             ]
         );
 
-        $catalog = Catalog::findOrFail($request->catalog_id);
+        $bahan = Bahan::findOrFail($request->catalog_id);
+        $bahan->update([
+            'jumlah' => $bahan->jumlah + $request->jumlah,
+        ]);
 
-        $json = json_decode($catalog->bahan, true);
-        for ($i = 0; $i < $request->jumlah; $i++) {
-            foreach ($json as $key => $value) {
-                $bahan = Bahan::findOrFail($key);
-                $bahan->update([
-                    'jumlah' => $bahan->jumlah - $value,
-                ]);
-            }
-        }
-
-        Produks::create([
-            'catalog_id' => $request->catalog_id,
+        Produksi_Bahan_Baku::create([
+            'bahan_id' => $request->catalog_id,
             'jumlah_produksi' => $request->jumlah,
         ]);
 
-        return redirect()->route('admin.produksi')->with('success', 'Bahan Baku has been added!');
+        return redirect()->route('admin.produksi_bahan')->with('success', 'Bahan Baku has been added!');
     }
 
-    public function report(Request $request, ProduksiProdukChart $produksiProdukChart)
+    public function report(Request $request)
     {
         $this->validate(
             $request,
@@ -87,16 +81,15 @@ class ProduksController extends Controller
 
         if ($request->has('end_date') && !empty($request->end_date)) {
             $end_date = \Carbon\Carbon::parse($request->end_date)->format('Y-m-d');
-            $produksi = Produks::whereBetween('created_at', [$start_date, $end_date])->get();
+            $produksi = Produksi_Bahan_Baku::whereBetween('created_at', [$start_date, $end_date])->get();
         } else {
-            $produksi = Produks::whereDate('created_at', $start_date)->get();
+            $produksi = Produksi_Bahan_Baku::whereDate('created_at', $start_date)->get();
         }
         $data = [
             'produksi' => $produksi,
-            'produksiProdukChart' => $produksiProdukChart->build(),
         ];
-        $pdf = PDF::loadView('admin.master-data.Produksi.report', $data)->setPaper('a4', 'portrait');
-        return $pdf->download('Produksi Boneva.pdf');
+        $pdf = PDF::loadView('admin.master-data.Produksi_Bahan.report', $data)->setPaper('a4', 'portrait');
+        return $pdf->download('Produksi Bahan Baku.pdf');
     }
 
     /**

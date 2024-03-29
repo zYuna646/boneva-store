@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\BahanChart;
+use App\Charts\JumlahOrderChart;
+use App\Charts\LineBahan;
+use App\Charts\LineProduksi;
+use App\Charts\OrderChart;
+use App\Charts\ProductChart;
+use App\Charts\ProduksiBahanChart;
+use App\Charts\ProduksiProdukChart;
 use App\Models\Catalog;
 use App\Models\Category;
 use App\Models\Information;
@@ -10,10 +18,12 @@ use App\Models\User;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
-{
-    public function index()
-    {
+class AdminController extends Controller {
+    public function index(BahanChart $bahanChart, ProductChart $productChart,
+        ProduksiProdukChart $produksiProdukChart, ProduksiBahanChart $produksiBahanChart, 
+        OrderChart $orderChart, JumlahOrderChart $jumlahOrderChart,
+        LineProduksi $lineProduksi, LineBahan $lineBahan
+        ) {
         $count_catalog = Catalog::count();
         $count_category = Category::count();
         $count_video = Video::count();
@@ -34,11 +44,18 @@ class AdminController extends Controller
             'latest_products' => $latest_products,
             'latest_video' => $latest_video,
             'latest_informations' => $latest_informations,
+            'bahanChart' => $bahanChart->build(),
+            'productChart' => $productChart->build(),
+            'ProduksiProduct' => $produksiProdukChart->build(),
+            'produksiBahan' => $produksiBahanChart->build(),
+            'orderChart' => $orderChart->build(),
+            'jumlahOrder' => $jumlahOrderChart->build(),
+            'lineProduksi' => $lineProduksi->build(),
+            'lineBahan' => $lineBahan->build()
         ]);
     }
 
-    public function accountSetting()
-    {
+    public function accountSetting() {
         return view('admin.settings.account-setting.index', [
             'title' => 'Account Setting',
             'subtitle' => '',
@@ -47,12 +64,11 @@ class AdminController extends Controller
         ]);
     }
 
-    public function payment(Request $request)
-    {
+    public function payment(Request $request) {
         $this->validate($request, [
-           'bank' => 'required',
-           'rekening' => 'required',
-           'pemilik' => 'required'
+            'bank' => 'required',
+            'rekening' => 'required',
+            'pemilik' => 'required'
         ], [
 
         ]);
@@ -67,8 +83,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Payement Information been changed');
     }
 
-    public function changePassword(Request $request, $id)
-    {
+    public function changePassword(Request $request, $id) {
         $this->validate($request, [
             'current_password' => 'required',
             'new_password' => 'required|min:8',
@@ -83,7 +98,7 @@ class AdminController extends Controller
 
         $user = User::findOrFail($id);
 
-        if (password_verify($request->current_password, $user->password)) {
+        if(password_verify($request->current_password, $user->password)) {
             $user->update([
                 'password' => bcrypt($request->new_password),
             ]);
@@ -94,8 +109,7 @@ class AdminController extends Controller
         }
     }
 
-    public function changeInformation(Request $request, $id)
-    {
+    public function changeInformation(Request $request, $id) {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',

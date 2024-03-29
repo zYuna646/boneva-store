@@ -1,6 +1,6 @@
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
-    <div>
+    <div class="scroll-sidebar">
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="{{ route('admin.dashboard') }}" class="text-nowrap">
                 <div class="d-flex align-items-center">
@@ -13,8 +13,8 @@
             </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar border-top overflow-hidden" data-simplebar="">
-            <ul id="sidebarnav">
+        <nav class="sidebar-nav border-top">
+            <ul id="sidebarnav" class="nav flex-column">
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">Home</span>
@@ -66,6 +66,15 @@
                             <i class="ti ti-brand-appgallery"></i>
                         </span>
                         <span class="hide-menu">Products</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link @if ($active == 'produksi_bahan') active @endif"
+                        href="{{ route('admin.produksi_bahan') }}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-brand-appgallery"></i>
+                        </span>
+                        <span class="hide-menu">Produksi Bahan Baku</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
