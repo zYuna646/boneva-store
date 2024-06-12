@@ -80,12 +80,14 @@
                             <li class="scroll-to-section"><a href="#contact-section">Contact Us</a></li>
                             @auth
                                 @if (auth()->user()->role == 'admin')
-                                    <li class="scroll-to-section"> <a href="{{ route('admin.dashboard') }}">
-                                            Back to Dashboard &nbsp;
+                                    <li>
+                                        <a href="{{ route('admin.dashboard') }}">
+                                            Dashboard &nbsp;
                                             <i class="fa-solid fa-arrow-right"></i>
-                                        </a></li>
+                                        </a>
+                                    </li>
                                 @else
-                                    <li class="scroll-to-section">
+                                    <li>
                                         <form action="{{ route('logout') }}" method="post" class="d-inline">
                                             @csrf
                                             @method('post')
