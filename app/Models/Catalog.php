@@ -62,4 +62,9 @@ class Catalog extends Model
     {
         return $this->hasMany(CatalogImage::class);
     }
+
+    public function produks()
+    {
+        return $this->hasMany(Produks::class);
+    }
 }

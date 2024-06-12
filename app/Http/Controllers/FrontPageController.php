@@ -39,7 +39,8 @@ class FrontPageController extends Controller
 
     public function productDetail($slug)
     {
-        $product = Catalog::where('slug', $slug)->firstorfail();
+        $product = Catalog::with('produks')->where('slug', $slug)->firstorfail();
+        $product->totalStocks = $product->stock + $product->produks->sum('jumlah_produksi');
 
         $no_hp = AboutUs::pluck('phone')->first(); // Assuming the phone number has '-' characters
 

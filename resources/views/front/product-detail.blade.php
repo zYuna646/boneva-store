@@ -237,7 +237,7 @@
                                     <tr>
                                         <td><strong>Stock</strong></td>
                                         <td>:</td>
-                                        <td>{{ $product->stock ?? '' }}</td>
+                                        <td>{{ $product->totalStocks ?? '' }}</td>
                                     </tr>
                                 </table>
                             </div>

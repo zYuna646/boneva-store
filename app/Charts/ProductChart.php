@@ -16,12 +16,15 @@ class ProductChart
 
     public function build(): \ArielMejiaDev\LarapexCharts\BarChart
     {
-        $bahan = Catalog::all();
+        $bahan = Catalog::with('produks')->get();
+        $bahan->each(function ($catalog) {
+            $catalog->totalStocks = $catalog->stock + $catalog->produks->sum('jumlah_produksi');
+        });
         $data = [];
         $label = [];
 
         foreach ($bahan as $value) {
-            $data[] = $value->stock;
+            $data[] = $value->totalStocks;
             $label[] = $value->name;
         }
 

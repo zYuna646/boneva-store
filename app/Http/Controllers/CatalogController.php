@@ -16,11 +16,17 @@ class CatalogController extends Controller
      */
     public function index()
     {
+        $datas = Catalog::with('produks')->latest()->get();
+        
+        $datas->each(function ($catalog) {
+            $catalog->totalStocks = $catalog->stock + $catalog->produks->sum('jumlah_produksi');
+        });
+
         return view('admin.master-data.catalog.index', [
             'title' => 'Catalog',
             'subtitle' => '',
             'active' => 'catalog',
-            'datas' => Catalog::latest()->get(),
+            'datas' => $datas,
         ]);
     }
 

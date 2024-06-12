@@ -65,7 +65,7 @@
                             <th>Name</th>
                             <th>Category</th>
                             <th>Price</th>
-                            <th>Stock</th>
+                            <th>Total Stock</th>
                             <th>Unit</th>
                             <th>Minimum Pembelian</th>
                             <th>Image</th>
@@ -79,7 +79,7 @@
                                 <td>{{ $result->name }}</td>
                                 <td>{{ $result->category->name }}</td>
                                 <td>{{ $result->price }}</td>
-                                <td>{{ $result->stock }}</td>
+                                <td>{{ $result->totalStocks }}</td>
                                 <td>{{ $result->fabric }}</td>
                                 <td>{{ $result->minimum}}</td>
                                 <td>
