@@ -235,7 +235,7 @@ class OrderController extends Controller
 
         $message = 'Order has been verified';
 
-        return redirect()->route('admin.history')->with('success', $message);
+        return redirect()->route('admin.history_order')->with('success', $message);
     }
 
     /**
