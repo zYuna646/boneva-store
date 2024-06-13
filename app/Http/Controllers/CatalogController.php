@@ -6,6 +6,7 @@ use App\Models\Bahan;
 use App\Models\Catalog;
 use App\Models\CatalogImage;
 use App\Models\Category;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -20,6 +21,14 @@ class CatalogController extends Controller
         
         $datas->each(function ($catalog) {
             $catalog->totalStocks = $catalog->stock + $catalog->produks->sum('jumlah_produksi');
+            $orders = Order::whereRaw("JSON_EXTRACT(items, '$.\"{$catalog->id}\"') IS NOT NULL")->get();
+            foreach ($orders as $order) {
+                $itemsJson = json_decode($order->items, true);
+                if (isset($itemsJson[$catalog->id])) {
+                    $quantity = $itemsJson[$catalog->id];
+                    $catalog->totalStocks -= $quantity;
+                }
+            }
         });
 
         return view('admin.master-data.catalog.index', [
