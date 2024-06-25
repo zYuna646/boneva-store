@@ -21,7 +21,7 @@ class OrderChart
 
         // Group orders by date and count the number of orders for each date
         $ordersByDate = $orders->groupBy(function ($order) {
-            return $order->update_at->toDateString(); // Assuming you have a 'created_at' column
+            return $order->created_at->toDateString(); // Assuming you have a 'created_at' column
         });
 
         // Initialize arrays for labels and data

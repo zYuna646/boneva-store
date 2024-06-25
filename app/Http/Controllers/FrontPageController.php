@@ -7,6 +7,7 @@ use App\Models\Catalog;
 use App\Models\Category;
 use App\Models\Information;
 use App\Models\MainSlider;
+use App\Models\Order;
 use App\Models\ReviewSlider;
 use App\Models\Video;
 
@@ -41,6 +42,14 @@ class FrontPageController extends Controller
     {
         $product = Catalog::with('produks')->where('slug', $slug)->firstorfail();
         $product->totalStocks = $product->stock + $product->produks->sum('jumlah_produksi');
+        $orders = Order::whereRaw("JSON_EXTRACT(items, '$.\"{$product->id}\"') IS NOT NULL")->get();
+            foreach ($orders as $order) {
+                $itemsJson = json_decode($order->items, true);
+                if (isset($itemsJson[$product->id])) {
+                    $quantity = $itemsJson[$product->id];
+                    $product->totalStocks -= $quantity;
+                }
+            }
 
         $no_hp = AboutUs::pluck('phone')->first(); // Assuming the phone number has '-' characters
 
